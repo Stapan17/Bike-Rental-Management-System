@@ -30,6 +30,7 @@ class Bike(models.Model):
     bike_quantity = models.PositiveIntegerField()
     bike_type = models.CharField(max_length=20, choices=BIKE_TYPE_CHOICES)
     bike_model = models.CharField(max_length=30)
+    bike_brand = models.CharField(max_length=30)
     bike_view = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
