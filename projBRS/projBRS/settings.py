@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'projBRS.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 't1',  # add your database name
+        'NAME': 'brs',
         'USER': 'brs',
         'PASSWORD': 'b1r2s3@SOUL',
         'HOST': 'localhost',
