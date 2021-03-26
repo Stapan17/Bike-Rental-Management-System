@@ -18,7 +18,7 @@ class Station(models.Model):
     bikeQuantity = models.PositiveIntegerField()
 
     def __str__(self):
-        return self.station_id
+        return self.station_adress
 
 
 class Bike(models.Model):
@@ -74,4 +74,4 @@ class Payment(models.Model):
     Payment_user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.Transaction_id
+        return self.Payment_Des
