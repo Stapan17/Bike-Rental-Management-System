@@ -1,13 +1,22 @@
 {% extends "user/base.html" %}
 {% block title %}Home{% endblock %}
 {% block body %}
-    <h1>BRS</h1>
+<h1>BRS</h1>
 
-    <h1>Coming Soon!!!</h1>
+<h1>Coming Soon!!!</h1>
 
-    {% if request.user is True %}
-    <a href="{% url 'update_user' %}">UPDATE</a>
-    {% endif %}
+<h3>FILTER FORM STARTS</h3>
+<form method="get">
+    {{ filter.form.as_p }}
+    <button type="submit">Search</button>
+</form>
+<h3>available bikes</h3>
+<ul>
+    {% for bike in filter.qs %}
+    <li>{{bike.bike_number}} - {{bike.bike_color}}</li>
+    {% endfor %}
+</ul>
+<h3>FILTER FORM ENDS</h3>
 
-{% endblock  %}
 
+{% endblock %}

@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import userInfo, User
+from .models import userInfo, User, Station, Bike
 from .forms import userForm, userInfoForm
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse
@@ -7,12 +7,17 @@ from django.contrib.auth.decorators import login_required
 from django.views import generic
 from django.urls import reverse_lazy
 from django.contrib import messages
+from .filters import bike_filter
 
 # Create your views here.
 
 
 def home(request):
-    return render(request, 'home.html')
+    stations = Station.objects.all()
+    bikes = Bike.objects.all()
+    bikes_filter = bike_filter(request.GET, queryset=bikes)
+    context = {'stations': stations, 'bikes': bikes, 'filter': bikes_filter}
+    return render(request, 'home.html', context)
 
 
 def register_user(request):
