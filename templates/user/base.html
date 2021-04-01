@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -8,88 +7,106 @@
 {% comment %} basic template for project BRS app {% endcomment %}
 
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>{%block title%}{%endblock%}</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <link rel="stylesheet" href="">
-         <style>
-        {% block style %} {% endblock %}
-    </style>
-    </head>
-    <body>
-       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">Project BRS</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav">
-      <li class="nav-item active">
-        <a class="nav-link" href="/">Home<span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Take Bike</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Return Bike</a>
-      </li>
-      
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#">Contactus</a>
-      </li>
-    </ul>
 
-{% comment %} //chekcking user is authenticated or not {% endcomment %}
-{% if user.is_authenticated %}   
-<ul class="navbar-nav ml-auto mr-5">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>{%block title%}{%endblock%}</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="">
+  <style>
+    {
+      % block style %
+    }
 
-     <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-         {{request.user}}
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-         <span class="dropdown-item" ></span>
-         <a class="dropdown-item" href="#">Profile</a>
-         <a class="dropdown-item" href="{% url 'reset_password' %}">Change Password</a>
-          <a class="dropdown-item" href="{% url 'logout_user' %}">Logout</a>
-        </div>
-      </li>
+      {
+      % endblock %
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="{% url 'home' %}">ONLINE BRS</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="/">Home<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'take_bike' %}">Take Bike</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'return_bike' %}">Return Bike</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#">Contactus</a>
+        </li>
       </ul>
-      </div>
-{% else %}  
- 
-<!--login and signup button-->
-  <div class="ml-auto">
-<button type="button" class="btn btn-success mr-2" ><a href="{% url 'login_user' %}">Login</a></button>
 
-<button type="button" class="btn btn-success mr-2 " ><a href="{% url 'register_user' %}">Register</a></button>
-</div>
-{% endif %}
-  </div>
-</nav>
+      {% comment %} //chekcking user is authenticated or not {% endcomment %}
+      {% if user.is_authenticated %}
+      <ul class="navbar-nav ml-auto mr-5">
 
-<!-- Showing all msg below navbar -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            {{request.user}}
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <span class="dropdown-item"></span>
+            <a class="dropdown-item" href="#">Profile</a>
+            <a class="dropdown-item" href="{% url 'reset_password' %}">Change Password</a>
+            <a class="dropdown-item" href="{% url 'logout_user' %}">Logout</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+    {% else %}
 
-{% if messages %}
-<ul class="messages">
+    <!--login and signup button-->
+    <div class="ml-auto">
+      <button type="button" class="btn btn-success mr-2"><a href="{% url 'login_user' %}">Login</a></button>
+
+      <button type="button" class="btn btn-success mr-2 "><a href="{% url 'register_user' %}">Register</a></button>
+    </div>
+    {% endif %}
+    </div>
+  </nav>
+
+  <!-- Showing all msg below navbar -->
+
+  {% if messages %}
+  <ul class="messages">
     {% for message in messages %}
-    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-    {% endfor %}
-</ul>
-{% endif %}
+    <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+      {% endfor %}
+  </ul>
+  {% endif %}
 
 
 
-{% comment %} body block {% endcomment %}
-{% block body %} {% endblock %}
+  {% comment %} body block {% endcomment %}
+  {% block body %} {% endblock %}
 
-         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        <script src="" async defer></script>
-    </body>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+  <script src="" async defer></script>
+</body>
+
 </html>

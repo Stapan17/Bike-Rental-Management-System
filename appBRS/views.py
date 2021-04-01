@@ -76,3 +76,20 @@ def login_user(request):
 def logout_user(request):
     logout(request)
     return redirect('home')
+
+
+@login_required(login_url='error')
+def take_bike(request):
+    stations = Station.objects.all()
+    bikes = Bike.objects.all()
+    bikes_filter = bike_filter(request.GET, queryset=bikes)
+    context = {'stations': stations, 'bikes': bikes, 'filter': bikes_filter}
+    return render(request, 'bike/take_bike.html', context)
+
+
+def return_bike(request):
+    return render(request, 'bike/return_bike.html')
+
+
+def error(request):
+    return render(request, 'error.html')

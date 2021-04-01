@@ -1,0 +1,62 @@
+{% extends "user/base.html" %}
+{% block title %}Home{% endblock %}
+{% block body %}
+
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous" />
+
+<h1 class="text-center">Error</h1>
+
+<h2 class="text-center">
+    To view this page please Register or Login Yourself!
+</h2>
+
+<div class="text-center">
+    <a href="{% url 'register_user' %}">
+        <div class="button">
+            <div class="green">REGISTER</div>
+        </div>
+    </a>
+    <a href="{% url 'login_user' %}">
+        <div class="button" onclick="{% url 'login_user' %}">
+            <div class="blue">LOGIN</div>
+        </div>
+    </a>
+</div>
+
+<style>
+    .text-center {
+        border: 3px solid #fff;
+        padding: 10px;
+        margin: 20px;
+    }
+
+    .button {
+        background: linear-gradient(to bottom, #339cff 5%, #0c6de3 100%);
+        background-color: #339cff;
+        border-radius: 11px;
+        border: 3px solid #51a3f5;
+        display: inline-block;
+        cursor: pointer;
+        color: #ffffff;
+        font-family: Trebuchet MS;
+        font-size: 28px;
+        font-weight: bold;
+        padding: 7px 76px;
+        text-decoration: none;
+        text-shadow: 2px 2px 0px #2b82d9;
+        margin: 50px;
+    }
+
+    .button:hover {
+        background: linear-gradient(to bottom, #0c6de3 5%, #339cff 100%);
+        background-color: #0c6de3;
+    }
+
+    .button:active {
+        position: relative;
+        top: 1px;
+    }
+</style>
+{% endblock %}

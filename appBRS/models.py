@@ -42,8 +42,6 @@ class Bike(models.Model):
         ("Not Available", "Not Available"),
     ]
 
-
-# Availability
     bike_number = models.CharField(primary_key=True, max_length=10)
     bike_color = models.CharField(max_length=20, choices=BIKE_COLOR_CHOICES)
     bike_type = models.CharField(max_length=20, choices=BIKE_TYPE_CHOICES)
