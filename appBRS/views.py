@@ -9,6 +9,7 @@ from django.urls import reverse_lazy
 from django.contrib import messages
 from .filters import bike_filter
 from django.views.decorators.csrf import csrf_exempt
+import razorpay
 
 
 # Create your views here.
@@ -86,6 +87,17 @@ def take_bike(request):
     bikes = Bike.objects.all()
     bikes_filter = bike_filter(request.GET, queryset=bikes)
     context = {'stations': stations, 'bikes': bikes, 'filter': bikes_filter}
+    
+    
+    if request.method == "POST":
+        name = request.POST.get('name')
+        amount = 50000
+
+        client = razorpay.Client(
+            auth=("rzp_test_pQD1ejHNOtqS0Y", "pqikXx7KeWw8Vv03XElgJKtJ"))
+
+        payment = client.order.create({'amount': amount, 'currency': 'INR',
+                                       'payment_capture': '1'})
 
     return render(request, 'bike/take_bike.html', context)
 
@@ -96,3 +108,7 @@ def return_bike(request):
 
 def error(request):
     return render(request, 'error.html')
+
+@csrf_exempt
+def success(request):
+    return render(request, "success.html")

@@ -16,4 +16,19 @@
     {% endfor %}
 </ul>
 
+<div class="center">
+
+    <form class="text-center border border-light p-5" action="/success/" method="POST">
+        {% csrf_token %}
+
+
+        <!-- RAZORPAY INTEGRATION HERE -->
+        <script src="https://checkout.razorpay.com/v1/checkout.js" data-key="rzp_test_pQD1ejHNOtqS0Y"
+            data-amount="50000" data-currency="INR" data-order_id="{{payment.id}}" data-buttontext="Pay with Razorpay"
+            data-name="App BRS" data-description="Testing! Testing! Testing!"
+            data-image="https://i.pinimg.com/originals/e0/e9/b1/e0e9b132034a2977f88b322635acf523.png" data-prefill.name="Shubham vora" data-prefill.email="201951173@iiitvadodara.ac.in"
+            data-theme.color="#6600ff"></script>
+    </form>
+
+</div>
 {% endblock %}

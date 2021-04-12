@@ -1,0 +1,25 @@
+{% extends "user/base.html" %}
+
+      {% block style %}
+        .center {
+            position: absolute;
+            text-align: center;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+     {% endblock %}
+
+{% block body %}
+    <div class="center">
+        <h3>
+        Your Bike is Ready at service station <i class="fas fa-check-circle"></i>
+        </h3>
+        <h5>
+            <a href="http://127.0.0.1:8000/">
+                Go TO Home
+            </a>
+        </h5>
+    </div> 
+
+{% endblock%}
