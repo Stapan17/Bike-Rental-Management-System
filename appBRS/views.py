@@ -87,10 +87,11 @@ def take_bike(request):
     bikes = Bike.objects.all()
     bikes_filter = bike_filter(request.GET, queryset=bikes)
     context = {'stations': stations, 'bikes': bikes, 'filter': bikes_filter}
-    
-    
+
     if request.method == "POST":
+        print("!@@")
         name = request.POST.get('name')
+        print(name)
         amount = 50000
 
         client = razorpay.Client(
@@ -98,6 +99,8 @@ def take_bike(request):
 
         payment = client.order.create({'amount': amount, 'currency': 'INR',
                                        'payment_capture': '1'})
+
+        return redirect('success')
 
     return render(request, 'bike/take_bike.html', context)
 
@@ -108,6 +111,7 @@ def return_bike(request):
 
 def error(request):
     return render(request, 'error.html')
+
 
 @csrf_exempt
 def success(request):
