@@ -9,9 +9,7 @@ from django.urls import reverse_lazy
 from django.contrib import messages
 from .filters import bike_filter
 from django.views.decorators.csrf import csrf_exempt
-from paytm import Checksum
 
-MERCHANT_KEY = 'bKMfNxPPf_QdZppa'
 
 # Create your views here.
 
@@ -88,22 +86,6 @@ def take_bike(request):
     bikes = Bike.objects.all()
     bikes_filter = bike_filter(request.GET, queryset=bikes)
     context = {'stations': stations, 'bikes': bikes, 'filter': bikes_filter}
-    if request.method=='POST':
-        param_dict={
-
-            'MID': 'DIY12386817555501617',
-            'ORDER_ID': 'order.order_id', #put order id in string here
-            'TXN_AMOUNT': '1', #put amount here in string
-            'CUST_ID': 'email', #put customer id here
-            'INDUSTRY_TYPE_ID': 'Retail',
-            'WEBSITE': 'WEBSTAGING',
-            'CHANNEL_ID': 'WEB',
-            'CALLBACK_URL':'http://127.0.0.1:8000/user/handlerequest/',
-
-        }
-        param_dict['CHECKSUMHASH'] = Checksum.generate_checksum(param_dict, MERCHANT_KEY)
-        return  render(request, 'user/paytm.html', {'param_dict': param_dict})
-
 
     return render(request, 'bike/take_bike.html', context)
 
@@ -114,21 +96,3 @@ def return_bike(request):
 
 def error(request):
     return render(request, 'error.html')
-
-@csrf_exempt
-def handleRequest(request):
-     # paytm will send you post request here
-    form = request.POST
-    response_dict = {}
-    for i in form.keys():
-        response_dict[i] = form[i]
-        if i == 'CHECKSUMHASH':
-            checksum = form[i]
-
-    verify = Checksum.verify_checksum(response_dict, MERCHANT_KEY, checksum)
-    if verify:
-        if response_dict['RESPCODE'] == '01':
-            print('order successful')
-        else:
-            print('order was not successful because' + response_dict['RESPMSG'])
-    return render(request, 'user/paymentstatus.html', {'response': response_dict})
