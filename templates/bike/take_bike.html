@@ -16,6 +16,7 @@
         <form class="border border-light" action="" method="POST">
             {% csrf_token %}
 
+            <input type="hidden" value="{{bike.bike_number}}" name="selected_bike">
             <!-- RAZORPAY INTEGRATION HERE -->
             <script src="https://checkout.razorpay.com/v1/checkout.js" data-key="rzp_test_pQD1ejHNOtqS0Y"
                 data-amount="50000" data-currency="INR" data-order_id="{{payment.id}}"
@@ -29,8 +30,6 @@
 </ul>
 
 <div class="center">
-
-
 
 </div>
 {% endblock %}

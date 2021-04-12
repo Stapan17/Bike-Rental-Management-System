@@ -89,9 +89,7 @@ def take_bike(request):
     context = {'stations': stations, 'bikes': bikes, 'filter': bikes_filter}
 
     if request.method == "POST":
-        print("!@@")
         name = request.POST.get('name')
-        print(name)
         amount = 50000
 
         client = razorpay.Client(
@@ -99,7 +97,15 @@ def take_bike(request):
 
         payment = client.order.create({'amount': amount, 'currency': 'INR',
                                        'payment_capture': '1'})
-
+        selected_bike_number = request.POST.get('selected_bike')
+        selected_bike = Bike.objects.get(bike_number=selected_bike_number)
+        selected_bike.bike_available = "Not Available"
+        selected_bike.bike_user = request.user.username
+        selected_bike.save()
+        current_user = userInfo.objects.get(user_id=request.user.id)
+        current_user.user_bike = selected_bike_number
+        current_user.save()
+        print(current_user)
         return redirect('success')
 
     return render(request, 'bike/take_bike.html', context)
