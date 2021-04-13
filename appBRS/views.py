@@ -17,7 +17,7 @@ import razorpay
 
 def home(request):
     stations = Station.objects.all()
-    bikes = Bike.objects.all()
+    bikes = Bike.objects.filter(bike_available="Available")
     bikes_filter = bike_filter(request.GET, queryset=bikes)
     context = {'stations': stations, 'bikes': bikes, 'filter': bikes_filter}
     return render(request, 'home.html', context)
@@ -84,7 +84,7 @@ def logout_user(request):
 @login_required(login_url='error')
 def take_bike(request):
     stations = Station.objects.all()
-    bikes = Bike.objects.all()
+    bikes = Bike.objects.filter(bike_available="Available")
     bikes_filter = bike_filter(request.GET, queryset=bikes)
     context = {'stations': stations, 'bikes': bikes, 'filter': bikes_filter}
 
@@ -111,8 +111,20 @@ def take_bike(request):
     return render(request, 'bike/take_bike.html', context)
 
 
+@login_required(login_url='error')
 def return_bike(request):
-    return render(request, 'bike/return_bike.html')
+    current_user = request.user
+    current_user_info = userInfo.objects.get(user_id=current_user.id)
+    flag = True
+    try:
+        current_bike = Bike.objects.get(
+            bike_number=current_user_info.user_bike)
+        context = {'current_bike': current_bike, 'flag': flag}
+    except:
+        flag = False
+        context = {'flag': flag}
+
+    return render(request, 'bike/return_bike.html', context)
 
 
 def error(request):

@@ -6,5 +6,28 @@
 
 <h1>Return Bike</h1>
 
+{% if flag %}
+{{current_bike.bike_number}} <br>
+{{current_bike.bike_color}}<br>
+{{current_bike.bike_type}}<br>
+{{current_bike.bike_model}}<br>
+{{current_bike.bike_brand}}<br>
+{{current_bike.bike_available}}<br>
+{{current_bike.bike_station}}<br>
+{{current_bike.bike_user}}<br>
+
+<h4> so you want to return bike, okay great.</h4>
+<h4>Tell there station any of the employee to enter his/her Crediential and take bike.</h4>
+<form action="" method="POST">
+    {% csrf_token %}
+    <h2>This form should only filled by our employees.</h2>
+    <input type="text" name='emp_username' placeholder="Enter Your Username"><br>
+    <input type="text" name="emp_password" placeholder="Enter Your Password"><br>
+    <input type="button" value="Confirm Take Bike">
+</form>
+
+{% else %}
+<h1>You haven't taken any bike yet.</h1>
+{% endif %}
 
 {% endblock %}
