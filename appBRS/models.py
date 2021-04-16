@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -51,6 +52,10 @@ class Bike(models.Model):
         max_length=20, choices=BIKE_AVAILABLITY_CHOICES)
     bike_station = models.ForeignKey(Station, on_delete=models.CASCADE)
     bike_user = models.CharField(max_length=30, blank=True, default='NONE')
+    bike_rent_number = models.PositiveIntegerField(default=1, blank=True)
+    bike_rent = models.CharField(
+        max_length=30, blank=True)
+    date_time = models.DateTimeField(default=datetime.now, blank=True)
 
     def __str__(self):
         return self.bike_number
@@ -71,6 +76,7 @@ class Employee(models.Model):
     employee_id = models.AutoField(primary_key=True)
     employee_name = models.CharField(max_length=20)
     employee_phonNo = models.CharField(max_length=10)
+    employee_superkey = models.CharField(max_length=20)
 
     def __str__(self):
         return self.employee_name

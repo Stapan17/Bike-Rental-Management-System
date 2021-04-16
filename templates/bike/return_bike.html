@@ -21,11 +21,12 @@
 <form action="" method="POST">
     {% csrf_token %}
     <h2>This form should only filled by our employees.</h2>
-    <input type="text" name='emp_username' placeholder="Enter Your Username"><br>
-    <input type="text" name="emp_password" placeholder="Enter Your Password"><br>
-    <input type="button" value="Confirm Take Bike">
+    <input type="text" name='emp_superkey' placeholder="Enter Your Superkey" required><br>
+    <button type="submit">Take Bike</button>
 </form>
-
+{% if error_flag %}
+Error : {{error}}
+{% endif %}
 {% else %}
 <h1>You haven't taken any bike yet.</h1>
 {% endif %}

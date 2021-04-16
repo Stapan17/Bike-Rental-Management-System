@@ -16,6 +16,14 @@
         <form class="border border-light" action="" method="POST">
             {% csrf_token %}
 
+            <input type="number" placeholder="" name="bike_rent_number" value="1" required>
+
+            <select name="rent_select" id="" required>
+                <option value="Hour">Hour</option>
+                <option value="Day">Day</option>
+                <option value="Week">Week</option>
+            </select>
+
             <input type="hidden" value="{{bike.bike_number}}" name="selected_bike">
             <!-- RAZORPAY INTEGRATION HERE -->
             <script src="https://checkout.razorpay.com/v1/checkout.js" data-key="rzp_test_pQD1ejHNOtqS0Y"

@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import userInfo, User, Station, Bike
+from .models import userInfo, User, Station, Bike, Employee
 from .forms import userForm, userInfoForm
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse
@@ -9,6 +9,7 @@ from django.urls import reverse_lazy
 from django.contrib import messages
 from .filters import bike_filter
 from django.views.decorators.csrf import csrf_exempt
+from datetime import datetime
 import razorpay
 
 
@@ -90,7 +91,7 @@ def take_bike(request):
 
     if request.method == "POST":
         name = request.POST.get('name')
-        amount = 50000
+        amount = 60000
 
         client = razorpay.Client(
             auth=("rzp_test_pQD1ejHNOtqS0Y", "pqikXx7KeWw8Vv03XElgJKtJ"))
@@ -98,15 +99,19 @@ def take_bike(request):
         payment = client.order.create({'amount': amount, 'currency': 'INR',
                                        'payment_capture': '1'})
         selected_bike_number = request.POST.get('selected_bike')
+        bike_rent_number = request.POST.get('bike_rent_number')
+        bike_rent = request.POST.get('rent_select')
         selected_bike = Bike.objects.get(bike_number=selected_bike_number)
         selected_bike.bike_available = "Not Available"
         selected_bike.bike_user = request.user.username
+        selected_bike.bike_rent_number = bike_rent_number
+        selected_bike.bike_rent = bike_rent
+        selected_bike.date_time = datetime.now()
         selected_bike.save()
         current_user = userInfo.objects.get(user_id=request.user.id)
         current_user.user_bike = selected_bike_number
         current_user.save()
-        print(current_user)
-        return redirect('success')
+        return redirect('success_take')
 
     return render(request, 'bike/take_bike.html', context)
 
@@ -124,6 +129,23 @@ def return_bike(request):
         flag = False
         context = {'flag': flag}
 
+    if request.method == "POST":
+        superkey = request.POST.get("emp_superkey")
+        try:
+            check = Employee.objects.get(employee_superkey=superkey)
+            current_user = userInfo.objects.get(user_id=request.user.id)
+            bike_number = current_user.user_bike
+            current_user.user_bike = "NOT TAKEN"
+            current_user.save()
+            current_bike = Bike.objects.get(bike_number=bike_number)
+            current_bike.bike_available = "Available"
+            current_bike.bike_user = "NONE"
+            current_bike.save()
+            return redirect('success_return')
+        except:
+            context = {'current_bike': current_bike,
+                       'flag': True, 'error_flag': True, 'error': "Superkey is Invalid"}
+
     return render(request, 'bike/return_bike.html', context)
 
 
@@ -132,5 +154,9 @@ def error(request):
 
 
 @csrf_exempt
-def success(request):
-    return render(request, "success.html")
+def success_take(request):
+    return render(request, "bike/success_take.html")
+
+
+def success_return(request):
+    return render(request, "bike/success_return.html")
