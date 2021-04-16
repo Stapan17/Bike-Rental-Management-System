@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import userInfo, User, Station, Bike, Employee
+from .models import userInfo, User, Station, Bike, Employee, contactUS
 from .forms import userForm, userInfoForm
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse
@@ -160,3 +160,22 @@ def success_take(request):
 
 def success_return(request):
     return render(request, "bike/success_return.html")
+
+
+def contact(request):
+    if request.method == 'POST':
+        form = contactUS()
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        message = request.POST.get('message')
+
+        form.name = name
+        form.mail = email
+        form.message = message
+        form.save()
+        return redirect('home')
+    return render(request, 'contact.html')
+
+
+def admin(request):
+    return render(request, 'admin.html')

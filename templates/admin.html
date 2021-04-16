@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Profile</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./../static/css/contact.css">
+
+  <style>
+    body {
+      background: #f5f5f5;
+      font-family: tahoma;
+      height: 100vh;
+      background-image: url(../../static/lb3.jpg);
+      background-size: cover;
+      background-position: center;
+      align-items: center;
+    }
+
+    .navbar {
+      background: #0d0d0d;
+    }
+
+    .album {
+      background: #f5f5f5;
+    }
+
+    .navbar-brand {
+      font-size: 35px;
+    }
+
+    .cl {
+      border-radius: 15px;
+    }
+
+    .card {
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      max-width: 380px;
+      text-align: center;
+      padding: 60px;
+      margin: 40px;
+      background: #539079;
+    }
+
+    .row {
+      display: flex;
+      justify-content: center;
+      flex-direction: row;
+    }
+
+    .title {
+      font-size: 18px;
+    }
+
+    .inst {
+      font-size: 19px;
+    }
+
+    .image {
+      width: 100%;
+      padding: 20px;
+    }
+
+    button {
+      border: none;
+      border-radius: 6px;
+      outline: 0;
+      display: inline-block;
+      padding: 8px;
+      color: white;
+      background-color: #323232;
+      text-align: center;
+      cursor: pointer;
+      width: 100%;
+      font-size: 18px;
+    }
+
+    a {
+      text-decoration: none;
+      font-size: 22px;
+      color: black;
+    }
+
+    button:hover,
+    a:hover {
+      opacity: 0.7;
+    }
+
+    h1 {
+      font-size: 30px;
+    }
+
+    .fa:hover {
+      opacity: 0.7;
+    }
+
+    .fa {
+      padding: 8px;
+    }
+
+    .fa-facebook {
+      border: solid #3B5998;
+      border-radius: 4px;
+      background: #3B5998;
+      color: white;
+    }
+
+    .fa-instagram {
+      border: solid #ff0000;
+      border-radius: 5px;
+      background: #ff0000;
+      color: white;
+    }
+
+    .fa-linkedin {
+      border: solid #007bb5;
+      border-radius: 4px;
+      background: #007bb5;
+      color: white;
+    }
+
+    .fa-twitter {
+      border: solid #55ACEE;
+      border-radius: 4px;
+      background: #55ACEE;
+      color: white;
+    }
+
+    .fa-github {
+      border: solid #00e500;
+      border-radius: 4px;
+      background: #00e500;
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-12">
+          <center><a class="navbar-brand" href="{% url 'home' %}" style="color:#00ff00; margin-left: 530px;">Online
+              BRS</a> </center>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div style="color: white; margin-left: 615px; font-size: 20px;"> Admin</div>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  {% comment %} -------admin-------- {% endcomment %}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <div class="row">
+    <div class="column">
+      <div class="card">
+        <img class="image" src="../../static/tapan.png" alt="tapan" style="width:100%">
+        <h1>Tapan Savani</h1>
+        <p class="title">B-Tech IT</p>
+        <p class="inst">IIIT Vadodara</p>
+        <p>
+          <a href="#"><i class="fa fa-twitter"></i></a>
+          <a href="#"><i class="fa fa-linkedin"></i></a>
+          <a href="#"><i class="fa fa-facebook"></i></a>
+          <a href="#"><i class="fa fa-github"></i> </a>
+        </p>
+        <p><button>Contact</button></p>
+      </div>
+    </div>
+    <div clas="column">
+    </div>
+    <div clas="column">
+      <div class="card">
+        <img class="image" src="../../static/mohit.png" alt="mohit">
+        <h1>Mohit Panchasara</h1>
+        <p class="title">B-Tech IT</p>
+        <p class="inst">IIIT Vadodara</p>
+        <p>
+          <a href="#"><i class="fa fa-instagram"></i></a>
+          <a href="#"><i class="fa fa-twitter"></i></a>
+          <a href="#"><i class="fa fa-linkedin"></i></a>
+          <a href="#"><i class="fa fa-github"></i> </a>
+        </p>
+        <p><button>Contact</button></p>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="column">
+      <div class="card">
+        <img class="image" src="../../static/tapan.png" alt="tapan" style="width:100%">
+        <h1>Shubham Vora</h1>
+        <p class="title">B-Tech IT</p>
+        <p class="inst">IIIT Vadodara</p>
+        <p>
+          <a href="#"><i class="fa fa-twitter"></i></a>
+          <a href="#"><i class="fa fa-linkedin"></i></a>
+          <a href="#"><i class="fa fa-facebook"></i></a>
+          <a href="#"><i class="fa fa-github"></i> </a>
+        </p>
+        <p><button>Contact</button></p>
+      </div>
+    </div>
+    <div clas="column">
+    </div>
+    <div clas="column">
+      <div class="card">
+        <img class="image" src="../../static/mohit.png" alt="mohit">
+        <h1>Yash Makawana</h1>
+        <p class="title">B-Tech IT</p>
+        <p class="inst">IIIT Vadodara</p>
+        <p>
+          <a href="#"><i class="fa fa-instagram"></i></a>
+          <a href="#"><i class="fa fa-twitter"></i></a>
+          <a href="#"><i class="fa fa-linkedin"></i></a>
+          <a href="#"><i class="fa fa-github"></i> </a>
+        </p>
+        <p><button>Contact</button></p>
+      </div>
+    </div>
+  </div>
+
+  {% comment %} -------------------- {% endcomment %}
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+
+  <footer class="text-muted py-5" style="background: #0d0d0d;">
+    <div class="container">
+      <p class="float-end mb-1">
+        <a href="#">Back to top</a>
+      </p>
+      <p class="mb-1">
+        © 2021 All rights reserved.
+      </p>
+    </div>
+  </footer>
+
+</body>
+
+
+</html>

@@ -18,7 +18,13 @@
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel="stylesheet" href="">
   <style>
-    {% block style %} {% endblock %}
+    {
+      % block style %
+    }
+
+      {
+      % endblock %
+    }
   </style>
 </head>
 
@@ -42,7 +48,11 @@
         </li>
 
         <li class="nav-item">
-          <a class="nav-link disabled" href="#">Contactus</a>
+          <a class="nav-link disabled" href="{% url 'contact' %}">Contactus</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link disabled" href="{% url 'admin' %}">Admin</a>
         </li>
       </ul>
 
