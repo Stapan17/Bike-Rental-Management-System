@@ -1,18 +1,198 @@
 {% extends "user/base.html" %}
+
+<!--title-->
 {% block title %}Home{% endblock %}
+
+<!--body-->
 {% block body %}
+<!--slider-->
+<div
+  id="carouselExampleInterval"
+  class="carousel slide"
+  data-bs-ride="carousel"
+>
+  <div class="carousel-inner">
+    <div class="carousel-item active" data-bs-interval="10000">
+      <img src="../static/1.jpg" class="d-block w-100" alt="..." />
+    </div>
+    <div class="carousel-item" data-bs-interval="2000">
+      <img src="../static/2.jpg" class="d-block w-100" alt="..." />
+    </div>
+    <div class="carousel-item">
+      <img src="../static/3.jpg" class="d-block w-100" alt="..." />
+    </div>
+  </div>
+  <a
+    type="button"
+    class="carousel-control-prev"
+    data-bs-target="#carouselExampleInterval"
+    data-bs-slide="prev"
+  >
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </a>
+  <a
+    class="carousel-control-next"
+    type="button"
+    data-bs-target="#carouselExampleInterval"
+    data-bs-slide="next"
+  >
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </a>
+</div>
 
-
-
+<!--form-->
+<h1>---</h1>
 <form method="GET">
-    {{ filter.form.as_p }}
-    <button type="submit">Search</button>
+  <h1>Search Any Bike</h1>
+  {{ filter.form.as_p }}
+  <button class="btnX" type="submit">Search</button>
 </form>
-<h3>available bikes</h3>
-<ul>
+
+<!--avaiable bikes-->
+<div class="bikes">
+  <h1>---</h1>
+  <h1>Available Bikes</h1>
+  <ul>
     {% for bike in filter.qs %}
     <li>{{bike.bike_number}} - {{bike.bike_color}}</li>
     {% endfor %}
-</ul>
+  </ul>
+</div>
+
+<style>
+  *,
+  *:before,
+  *:after {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: "Nunito", sans-serif;
+    color: #384047;
+  }
+
+  form {
+    max-width: 300px;
+    margin: 10px auto;
+    margin-top: 30px;
+    padding: 10px 20px;
+    background: #f4f7f8;
+    border-radius: 8px;
+  }
+
+  h1 {
+    font-size: 35px;
+    margin: 0 0 20px 0;
+    margin-top: 20px;
+    text-align: center;
+  }
+
+  input[type="text"],
+  input[type="password"],
+  input[type="date"],
+  input[type="datetime"],
+  input[type="email"],
+  input[type="number"],
+  input[type="search"],
+  input[type="tel"],
+  input[type="time"],
+  input[type="url"],
+  textarea,
+  select {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    font-size: 16px;
+    height: auto;
+    margin: 0;
+    outline: 0;
+    padding: 10px;
+    width: 100%;
+    background-color: #e8eeef;
+    color: #8a97a0;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03) inset;
+    margin-bottom: 5px;
+  }
+
+  input[type="radio"],
+  input[type="checkbox"] {
+    margin: 0 4px 8px 0;
+  }
+
+  select {
+    padding: 6px;
+    height: 32px;
+    border-radius: 2px;
+  }
+
+  button {
+    align: center;
+    padding: 14px 39px 14px 39px;
+    color: #fff;
+    background-color: #4bc970;
+    font-size: 18px;
+    text-align: center;
+    font-style: normal;
+    border-radius: 5px;
+    width: 50%;
+    border: 1px solid #3ac162;
+    border-width: 1px 1px 3px;
+    box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.1) inset;
+    margin-bottom: 10px;
+    margin-left: 25%;
+  }
+
+  fieldset {
+    margin-bottom: 30px;
+    border: none;
+  }
+
+  legend {
+    font-size: 1.4em;
+    margin-bottom: 10px;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  label.light {
+    font-weight: 300;
+    display: inline;
+  }
+  .bikes {
+    margin-top: 0px;
+  }
+
+  .number {
+    background-color: #5fcf80;
+    color: #fff;
+    height: 30px;
+    width: 30px;
+    display: inline-block;
+    font-size: 0.8em;
+    margin-right: 4px;
+    line-height: 30px;
+    text-align: center;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.2);
+    border-radius: 100%;
+  }
+
+  @media screen and (min-width: 480px) {
+    form {
+      max-width: 700px;
+    }
+  }
+</style>
+
+<script
+  src="/docs/5.0/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+  crossorigin="anonymous"
+></script>
 
 {% endblock %}
