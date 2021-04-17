@@ -1,87 +1,161 @@
+{% extends 'user/base.html' %}
+
+<!--title-->
+{% block title %}Contact Form{% endblock title %}
+
+<!--body-->
+{% block body %}
 <!DOCTYPE html>
-<html>
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Form</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
-    <link rel="stylesheet" href="./../static/css/contact.css">
+<style>
+  .cl {
+    border-radius: 15px;
+  }
 
-    <style>
-        .cl {
-            border-radius: 15px;
-        }
+  body {
+    background: f5f5f5;
+  }
 
-        body {
-            background: f5f5f5;
-        }
+  .navbar {
+    background: #0d0d0d;
+  }
 
-        .navbar {
-            background: #0d0d0d;
-        }
+  .album {
+    background: #f5f5f5;
+  }
 
-        .album {
-            background: #f5f5f5;
-        }
+  .navbar-brand {
+    font-size: 45px;
+  }
 
-        .navbar-brand {
-            font-size: 45px;
-        }
-    </style>
-</head>
+  .contact-clean {
+    background: #f1f7fc;
+    padding: 80px 0;
+  }
 
-<body>
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-12">
-                    <center><a class="navbar-brand" href="{% url 'home' %}"
-                            style="color:#00ff00; margin-left: 485px;">Online BRS</a></center>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div style="color: white; margin-left: 590px; font-size: 20px;"> Contact us</div>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+  @media (max-width: 767px) {
+    .contact-clean {
+      padding: 20px 0;
+    }
+  }
 
-                    </div>
-                </div>
-            </div>
-        </div>
-    </nav>
+  .contact-clean form {
+    max-width: 480px;
+    width: 90%;
+    margin: 0 auto;
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 4px;
+    color: #505e6c;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+  }
 
-    <div class="contact-clean cl">
-        <form method="POST" action="">
-            {% csrf_token %}
-            <div class="form-group"><input class="form-control" type="text" name="name" placeholder="Name" required>
-            </div>
-            <div class="form-group"><input class="form-control" type="email" name="email" placeholder="Email" required>
-            </div>
-            <div class="form-group"><textarea class="form-control" rows="14" name="message" placeholder="Message"
-                    required></textarea></div>
-            <div class="form-group"><button class="btn btn-primary" type="submit">Send</button></div>
-        </form>
+  @media (max-width: 767px) {
+    .contact-clean form {
+      padding: 30px;
+    }
+  }
+
+  .contact-clean h2 {
+    margin-top: 5px;
+    font-weight: bold;
+    font-size: 28px;
+    margin-bottom: 36px;
+    color: inherit;
+  }
+
+  .contact-clean .form-group:last-child {
+    margin-bottom: 5px;
+  }
+
+  .contact-clean form .form-control {
+    background: #fff;
+    border-radius: 2px;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.05);
+    outline: none;
+    color: inherit;
+    padding-left: 12px;
+    height: 42px;
+  }
+
+  .contact-clean form .form-control:focus {
+    border: 1px solid #b2b2b2;
+  }
+
+  .contact-clean form textarea.form-control {
+    min-height: 100px;
+    max-height: 260px;
+    padding-top: 10px;
+    resize: vertical;
+  }
+
+  .contact-clean form .btn {
+    padding: 16px 32px;
+    border: none;
+    background: none;
+    box-shadow: none;
+    text-shadow: none;
+    opacity: 0.9;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 13px;
+    letter-spacing: 0.4px;
+    line-height: 1;
+    outline: none !important;
+  }
+
+  .contact-clean form .btn:hover {
+    opacity: 1;
+  }
+
+  .contact-clean form .btn:active {
+    transform: translateY(1px);
+  }
+
+  .contact-clean form .btn-primary {
+    background-color: #055ada !important;
+    margin-top: 15px;
+    color: #fff;
+  }
+</style>
+
+<div class="contact-clean cl">
+  <form method="POST" action="">
+    {% csrf_token %}
+    <div class="form-group">
+      <input
+        class="form-control"
+        type="text"
+        name="name"
+        placeholder="Name"
+        required
+      />
     </div>
+    <div class="form-group">
+      <input
+        class="form-control"
+        type="email"
+        name="email"
+        placeholder="Email"
+        required
+      />
+    </div>
+    <div class="form-group">
+      <textarea
+        class="form-control"
+        rows="14"
+        name="message"
+        placeholder="Message"
+        required
+      ></textarea>
+    </div>
+    <div class="form-group">
+      <button class="btn btn-primary" type="submit">Send</button>
+    </div>
+  </form>
+</div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
-
-    <footer class="text-muted py-5" style="background: #0d0d0d">
-        <div class="container">
-            <p class="float-end mb-1">
-                <a href="#">Back to top</a>
-            </p>
-            <p class="mb-1">
-                © 2021 All rights reserved.
-            </p>
-        </div>
-    </footer>
-
-</body>
-
-
-</html>
+{% endblock body %}
