@@ -10,6 +10,15 @@
     <button type="submit">Search</button>
 </form>
 <h3>available bikes</h3>
+
+<!-- for (k1, k2) in fin_ans:
+print(k1.hourly_rent)
+print(k2.bike_number) -->
+<!-- 
+{% for (k1,k2) in fin_ans %}
+<p>{{k1.hourly_rent}} - {{k2.bike_number}}</p>
+{% endfor %} -->
+
 <ul>
     {% for bike in filter.qs %}
     <li>{{bike.bike_number}} - {{bike.bike_color}}

@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import userInfo, User, Station, Bike, Employee, contactUS
+from .models import userInfo, User, Station, Bike, Employee, contactUS, Rent
 from .forms import userForm, userInfoForm
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse
@@ -87,7 +87,17 @@ def take_bike(request):
     stations = Station.objects.all()
     bikes = Bike.objects.filter(bike_available="Available")
     bikes_filter = bike_filter(request.GET, queryset=bikes)
-    context = {'stations': stations, 'bikes': bikes, 'filter': bikes_filter}
+    bikes_rents = []
+    for i in bikes_filter.qs:
+        current_bike_rent = Rent.objects.get(bike_rent=i.bike_number)
+        bikes_rents.append(current_bike_rent)
+    fin_ans = zip(bikes_rents, bikes_filter.qs)
+    fin_ans = list(fin_ans)
+    # for (k1, k2) in fin_ans:
+    #     print(k1.hourly_rent)
+    #     print(k2.bike_number)
+    context = {'stations': stations, 'bikes': bikes,
+               'filter': bikes_filter, 'bikes_rents': bikes_rents, 'fin_ans': fin_ans}
 
     if request.method == "POST":
         name = request.POST.get('name')

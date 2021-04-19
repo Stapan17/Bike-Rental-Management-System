@@ -18,36 +18,40 @@
 
     .headered {
         color: white;
-        background-color: rgb(255, 94, 0);
-        width: 40%;
+        background-color: #ff8d1e;
+        height: 70px;
+        width: 45%;
         text-align: center;
-        border-radius: 15px;
-        margin-top: 50px;
+        border-radius: 10px;
+        margin: 50px 0;
+        padding-top: 16px;
     }
 
-    .btn {
+    .btn1 {
         height: 60px;
         font-size: 30px;
         width: auto;
         color: white;
         border-radius: 15px;
-        margin: 10px;
+        margin: 15px;
+        padding: 0 15px;
     }
 
-    .login {
-        margin-top: 110px;
+    .inlogin {
+        margin-top: 10px;
     }
 
     .form-control {
         width: 30%;
         margin: 20px;
         padding: 10px;
-        height: 70px;
-        font-size: 40px;
-        border-radius: 15px;
+        height: 60px;
+        font-size: 35px;
+        border-radius: 12px;
         border-style: solid;
-        border-width: 3px 3px;
-        border-color: green;
+        border-width: 2px 5px;
+        border-color: #1E90FF;
+        text-align: center;
     }
 
     .txt {
@@ -64,21 +68,23 @@
         {% csrf_token %}
         <div class="login">
 
-            <input type="text" class="form-control" name="username" value="" id="floatingInput" placeholder="Username">
+            <input type="text" class="form-control" name="username" value="" id="floatingInput" placeholder="Username"
+                required>
 
 
             <input type="password" class="form-control" name="password" value="" id="floatingPassword"
-                placeholder="Password">
+                placeholder="Password" required>
 
 
-            <button type="submit" class="btn btn-outline-success" value="">Login</button>
+            <button type="submit" class="btn1 btn-outline-success" value="">Login</button>
         </div>
 
     </form>
 
-    <a href="{% url 'reset_password' %}"><button type="submit" class="btn btn-outline-danger" value="">Forgot
+    <a href="{% url 'reset_password' %}"><button type="submit" class="btn1 btn-outline-danger" value="">Forgot
             Password</button></a><br />
-    <a href="{% url 'register_user' %}"><button type="submit" class="btn btn-outline-primary" value="">Create account
+    <a href="{% url 'register_user' %}"><button type="submit" class="btn1 btn-outline-primary"
+            style="margin-bottom: 50px;" value="">Create account
             here</button></a> <br>
 </center>
 
