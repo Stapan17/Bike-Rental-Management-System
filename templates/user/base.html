@@ -244,13 +244,19 @@
 
     .navbar-nav {}
 
-    .nav-link {}
+    .nav-link: hover{
+      color: #ff8d1e;
+      background-color: #ff8d1e;
+    }
 
     .nav-item {
       text-align: center;
-      font-size: 17px;
+      font-size: 23px;
       margin-left: 10px;
       height: auto;
+    }
+    .nav-item:hover{
+      color: #ff8d1e;
     }
 
     .navbar-brand {
@@ -261,6 +267,15 @@
     .cont {
       margin-left: 50px auto;
     }
+
+    a:hover{
+      color: #ff8d1e;
+    }
+    .row{
+      margin: 0px 0px 0px 0px;
+      
+    }
+    
   </style>
 
 </head>
@@ -276,22 +291,22 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link " href="/"  onmouseover="this.style.color='#ff8d1e'"  onmouseout="this.style.color='white'">Home<span class="sr-only">(current)</span></a>
+            </li>
             <li class="nav-item active">
-              <a class="nav-link" href="/">Home<span class="sr-only">(current)</span></a>
+              <a class="nav-link "  onmouseover="this.style.color='#ff8d1e'"  onmouseout="this.style.color='white'" href="{% url 'take_bike' %}">Take Bike</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'take_bike' %}">Take Bike</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'return_bike' %}">Return Bike</a>
+            <li class="nav-item active">
+              <a class="nav-link "  onmouseover="this.style.color='#ff8d1e'"  onmouseout="this.style.color='white'" href="{% url 'return_bike' %}">Return Bike</a>
             </li>
 
-            <li class="nav-item">
-              <a class="nav-link disabled" href="{% url 'contact' %}">Contactus</a>
+            <li class="nav-item active">
+              <a class="nav-link"  onmouseover="this.style.color='#ff8d1e'"  onmouseout="this.style.color='white'" href="{% url 'contact' %}">Contactus</a>
             </li>
 
-            <li class="nav-item">
-              <a class="nav-link disabled" href="{% url 'admin' %}">Admin</a>
+            <li class="nav-item active">
+              <a class="nav-link"  onmouseover="this.style.color='#ff8d1e'"  onmouseout="this.style.color='white'" href="{% url 'admin' %}">Admin</a>
             </li>
           </ul>
 
@@ -318,9 +333,9 @@
         <!--login and signup button-->
 
         <div class="ml-auto">
-          <a class="btn mr-2" href="{% url 'login_user' %}">Login</a></button>
+          <a class="btn mr-2 float-right" href="{% url 'login_user' %}">Login</a></button>
 
-          <a class="btn mr-2" href="{% url 'register_user' %}">Register</a></button>
+          <a class="btn mr-2 float-right" href="{% url 'register_user' %}">Register</a></button>
         </div>
         {% endif %}
     </div>
