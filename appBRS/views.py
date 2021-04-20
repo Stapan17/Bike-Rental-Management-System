@@ -38,7 +38,15 @@ def register_user(request):
             user_info = user_info_form.save(commit=False)
             user_info.user = user
             user_info.save()
+        
+            username = request.POST.get('username')
+            password = request.POST.get('password')
 
+            user = authenticate(username=username, password=password)
+
+            if user:
+                login(request, user)
+                
             return redirect('home')
 
         else:
@@ -101,7 +109,7 @@ def take_bike(request):
 
     if request.method == "POST":
         name = request.POST.get('name')
-        amount = 60000
+        amount = 600
 
         client = razorpay.Client(
             auth=("rzp_test_pQD1ejHNOtqS0Y", "pqikXx7KeWw8Vv03XElgJKtJ"))
