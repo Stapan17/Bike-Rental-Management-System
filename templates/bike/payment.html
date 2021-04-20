@@ -1,0 +1,41 @@
+<h1>Payment</h1>
+
+{{selected_bike.bike_number}}
+{{selected_bike.bike_color}}
+{{selected_bike.bike_type}}
+{{selected_bike.bike_model}}
+{{selected_bike.bike_brand}}
+{{selected_bike.bike_station}}
+
+<style>
+    #sel_bike1,
+    #sel_bike2,
+    #sel_bike3 {
+        display: none;
+    }
+</style>
+
+<form action="" method="POST">
+
+    {% csrf_token %}
+
+    <input type="number" placeholder="" name="bike_rent_number" value="1" required id="sel_bike1">
+
+    <select name="rent_select" id="sel_bike2" required>
+        <option value="Hour">Hour</option>
+        <option value="Day">Day</option>
+        <option value="Week">Week</option>
+    </select>
+
+    <input type="text" value="{{k2.bike_number}}" name="selected_bike" id="sel_bike3">
+
+    {{bike_rent_number}} - {{bike_rent}}
+
+    <!-- RAZORPAY INTEGRATION HERE -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js" data-key="rzp_test_pQD1ejHNOtqS0Y" data-amount="50000"
+        data-currency="INR" data-order_id="{{payment.id}}" data-buttontext="Make Payment" data-name="App BRS"
+        data-description="Payment for {{bike.bike_model}}"
+        data-image="https://i.pinimg.com/originals/e0/e9/b1/e0e9b132034a2977f88b322635acf523.png"
+        data-prefill.name="Online Brs" data-prefill.email="{{request.user.email}}" data-theme.color="#6600ff">
+        </script>
+</form>

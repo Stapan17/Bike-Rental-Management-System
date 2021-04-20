@@ -38,7 +38,7 @@ def register_user(request):
             user_info = user_info_form.save(commit=False)
             user_info.user = user
             user_info.save()
-        
+
             username = request.POST.get('username')
             password = request.POST.get('password')
 
@@ -46,7 +46,7 @@ def register_user(request):
 
             if user:
                 login(request, user)
-                
+
             return redirect('home')
 
         else:
@@ -101,35 +101,8 @@ def take_bike(request):
         bikes_rents.append(current_bike_rent)
     fin_ans = zip(bikes_rents, bikes_filter.qs)
     fin_ans = list(fin_ans)
-    # for (k1, k2) in fin_ans:
-    #     print(k1.hourly_rent)
-    #     print(k2.bike_number)
     context = {'stations': stations, 'bikes': bikes,
                'filter': bikes_filter, 'bikes_rents': bikes_rents, 'fin_ans': fin_ans}
-
-    if request.method == "POST":
-        name = request.POST.get('name')
-        amount = 600
-
-        client = razorpay.Client(
-            auth=("rzp_test_pQD1ejHNOtqS0Y", "pqikXx7KeWw8Vv03XElgJKtJ"))
-
-        payment = client.order.create({'amount': amount, 'currency': 'INR',
-                                       'payment_capture': '1'})
-        selected_bike_number = request.POST.get('selected_bike')
-        bike_rent_number = request.POST.get('bike_rent_number')
-        bike_rent = request.POST.get('rent_select')
-        selected_bike = Bike.objects.get(bike_number=selected_bike_number)
-        selected_bike.bike_available = "Not Available"
-        selected_bike.bike_user = request.user.username
-        selected_bike.bike_rent_number = bike_rent_number
-        selected_bike.bike_rent = bike_rent
-        selected_bike.date_time = datetime.now()
-        selected_bike.save()
-        current_user = userInfo.objects.get(user_id=request.user.id)
-        current_user.user_bike = selected_bike_number
-        current_user.save()
-        return redirect('success_take')
 
     return render(request, 'bike/take_bike.html', context)
 
@@ -165,6 +138,43 @@ def return_bike(request):
                        'flag': True, 'error_flag': True, 'error': "Superkey is Invalid"}
 
     return render(request, 'bike/return_bike.html', context)
+
+
+def payment(request):
+
+    if request.method == "POST":
+        name = request.POST.get('name')
+        amount = 600
+
+        client = razorpay.Client(
+            auth=("rzp_test_pQD1ejHNOtqS0Y", "pqikXx7KeWw8Vv03XElgJKtJ"))
+
+        payment = client.order.create({'amount': amount, 'currency': 'INR',
+                                       'payment_capture': '1'})
+        selected_bike_number = request.GET.get('selected_bike')
+        bike_rent_number = request.GET.get('bike_rent_number')
+        bike_rent = request.GET.get('rent_select')
+        selected_bike = Bike.objects.get(bike_number=selected_bike_number)
+        selected_bike.bike_available = "Not Available"
+        selected_bike.bike_user = request.user.username
+        selected_bike.bike_rent_number = bike_rent_number
+        selected_bike.bike_rent = bike_rent
+        selected_bike.date_time = datetime.now()
+        selected_bike.save()
+        current_user = userInfo.objects.get(user_id=request.user.id)
+        current_user.user_bike = selected_bike_number
+        current_user.save()
+        return redirect('success_take')
+
+    bike_rent_number = request.GET.get('bike_rent_number')
+    bike_rent = request.GET.get('rent_select')
+    selected_bike_number = request.GET.get('selected_bike')
+    selected_bike = Bike.objects.get(bike_number=selected_bike_number)
+
+    context = {'selected_bike': selected_bike,
+               'bike_rent_number': bike_rent_number, 'bike_rent': bike_rent}
+
+    return render(request, 'bike/payment.html', context)
 
 
 def error(request):
