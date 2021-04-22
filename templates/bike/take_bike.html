@@ -15,7 +15,7 @@
         
         
         <form class="border border-light" action="/payment/" method="GET">
-            {{k2.bike_number}} - {{k2.bike_model}} - {{k2.bike_brand}} - {{k2.bike_type}} -  {{k2.bike_station}} -
+          {{k2.bike_brand}} -{{k2.bike_model}} -   {{k2.bike_station}} -
         {{k2.bike_color}} - {{k1.hourly_rent}} - {{k1.daily_rent}} - {{k1.weekly_rent}} 
             <input type="number" placeholder="" name="bike_rent_number" value="1" required>
             <select name="rent_select" id="" required>
@@ -26,7 +26,7 @@
 
             <input type="text" value="{{k2.bike_number}}" name="selected_bike" id="sel_bike">
 
-            <button type="submit">Take and Go for Payment</button>
+            <button  type="submit" >Take and Go for Payment</button>
         </form>
     </li>
     <!-- <a href="{% url 'payment' %}">Go For Payment</a> -->
@@ -42,8 +42,13 @@
     }
   
     body {
-      font-family: "Nunito", sans-serif;
-      color: #4a5966;
+      margin: 0;
+      padding: 0;
+      background: url(../../static/two.jpg) no-repeat;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      color: white;
     }
     ul {
         font-size: 20px;
@@ -56,7 +61,7 @@
       margin: 10px auto;
       margin-top: 30px;
       padding: 10px 20px;
-      background: #f4f7f8;
+      background: #49a1be;
       border-radius: 8px;
     }
   
@@ -105,7 +110,7 @@
     }
   
     button {
-      align: center;
+      align : center;
       padding: 14px 39px 14px 39px;
       color: #fff;
       background-color: #4bc970;
