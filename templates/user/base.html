@@ -238,8 +238,19 @@
             transition: all 250ms ease-in-out 0s;
         }
 
+        .navbar{
+            background: #252525;
+            border-radius: 0px;
+            padding: 30px;
+            margin-bottom: 0px;
+        }
+
         .navbar-brand {
             font-size: 45px;
+           background: -webkit-linear-gradient(#ff8d1e, #CF1512);
+           -webkit-background-clip: text;
+           -webkit-text-fill-color: transparent;
+           margin-left: 5px;
         }
 
         .navbar-nav {}
@@ -251,7 +262,7 @@
 
         .nav-item {
             text-align: center;
-            font-size: 23px;
+            font-size: 21px;
             margin-left: 10px;
             height: auto;
         }
@@ -260,18 +271,13 @@
             color: #ff8d1e;
         }
 
-        .navbar-brand {
-            font-size: 45px;
-            margin-left: 5px;
-        }
-
         .cont {
             margin-left: 50px auto;
         }
 
         a:hover {
             color: #ff8d1e;
-        }
+        };
     </style>
 
 </head>
@@ -279,7 +285,7 @@
 <body>
 
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark">
         <a class="navbar-brand" href="{% url 'home' %}">ONLINE BRS</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -315,8 +321,8 @@
             {% if user.is_authenticated %}
             <ul class="navbar-nav ml-auto mr-5 float-right">
 
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button"
+                <li class="nav-item dropdown" >
+                    <a class="nav-link dropdown-toggle " onmouseover="this.style.color='#ff8d1e'" onmouseout="this.style.color='white'" href="#" id="navbarDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         {{request.user}}
                     </a>
@@ -366,8 +372,9 @@
                 <div class="row">
                     <div class="col-xs-12 col-sm-6 col-md-3">
                         <div class="widget subscribe no-box">
-                            <h5 class="widget-title">COMPANY NAME<span></span></h5>
-                            <p>About the company, little discription will goes here..</p>
+                            <h5 class="widget-title">AppBRS<span></span></h5>
+                            <p>This system is designed to help the customers who are taking bike
+                                or two-wheelers of various type and various color on rent.</p>
                         </div>
                     </div>
 
@@ -392,9 +399,6 @@
                                 <li>
                                     <div class="thumb-content"><a href="{% url 'admin' %}">Admin</a></div>
                                 </li>
-                                <li>
-                                    <div class="thumb-content"><a href="#.">About</a></div>
-                                </li>
                             </ul>
                         </div>
                     </div>
@@ -402,8 +406,8 @@
                     <div class="col-xs-12 col-sm-6 col-md-3">
                         <div class="widget no-box">
                             <h5 class="widget-title">Get Started<span></span></h5>
-                            <p>Get access to your full Training and Marketing Suite.</p>
-                            <a class="btn" href="#">Register Now</a>
+                            <span>Take your favourite bike</span><br><span>and enjoy ride.</span><br><br>
+                            <a class="btn" href="{% url 'home' %}">Register Now</a>
                         </div>
                     </div>
 
@@ -412,7 +416,7 @@
                             <h5 class="widget-title">Contact Us<span></span></h5>
 
                             <p>
-                                <a href="mailto:info@domain.com" title="glorythemes">info@domain.com</a>
+                                <a href="mailto:info@domain.com" title="glorythemes">contact@appbrs.com</a>
                             </p>
                             <ul class="social-footer2">
                                 <li class="">

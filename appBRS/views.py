@@ -170,9 +170,10 @@ def payment(request):
     bike_rent = request.GET.get('rent_select')
     selected_bike_number = request.GET.get('selected_bike')
     selected_bike = Bike.objects.get(bike_number=selected_bike_number)
-
+    rented_BIke = Rent.objects.filter(bike_rent=selected_bike_number).first()
+    
     context = {'selected_bike': selected_bike,
-               'bike_rent_number': bike_rent_number, 'bike_rent': bike_rent}
+               'bike_rent_number': bike_rent_number, 'bike_rent': bike_rent,'rented_BIke':rented_BIke}
 
     return render(request, 'bike/payment.html', context)
 

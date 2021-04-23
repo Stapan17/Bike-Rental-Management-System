@@ -1,186 +1,193 @@
 {% extends "user/base.html" %}
+<!--title-->
 {% block title %}Home{% endblock %}
-{% block body %}
-
-
+<!--body-->
+{% block body%}
 
 <h1>Return Bike</h1>
 
 {% if flag %}
-<h3> 
-
-    your bike is  {{current_bike.bike_brand}}  {{current_bike.bike_model}} of {{current_bike.bike_color}} color  .<br><br>
-    your bike id number is {{current_bike.bike_number}} and type {{current_bike.bike_type}}.<br>
-    the station  is {{current_bike.bike_station}}<br>
+<h3>
+  your bike is {{current_bike.bike_brand}} {{current_bike.bike_model}} of
+  {{current_bike.bike_color}} color .<br /><br />
+  your bike id number is {{current_bike.bike_number}} and type
+  {{current_bike.bike_type}}.<br />
+  the station is {{current_bike.bike_station}}<br />
 </h3>
-<h4> so you want to return bike, okay great.</h4>
-<h4>Tell there station any of the employee to enter his/her Crediential and take bike.</h4>
+<h4>so you want to return bike, okay great.</h4>
+<h4>
+  Tell there station any of the employee to enter his/her Crediential and take
+  bike.
+</h4>
 <form action="" method="POST">
-    {% csrf_token %}
-    <h2>This form should only filled by our employees.</h2>
-    <input type="text" name='emp_superkey' placeholder="Enter Your Superkey" required><br>
-    <button type="submit">Take Bike</button>
+  {% csrf_token %}
+  <h2>This form should only filled by our employees.</h2>
+  <input
+    type="text"
+    name="emp_superkey"
+    placeholder="Enter Your Superkey"
+    required
+  /><br />
+  <button type="submit">Take Bike</button>
 </form>
-{% if error_flag %}
-Error : {{error}}
-{% endif %}
-{% else %}
-<h1>You haven't taken any bike yet.</h1>
+{% if error_flag %} Error : {{error}} {% endif %} {% else %}
+<div class="cont">
+  <h1>You haven't taken any bike yet.</h1>
+</div>
 {% endif %}
 <style>
-    *,
-    *:before,
-    *:after {
-      -moz-box-sizing: border-box;
-      -webkit-box-sizing: border-box;
-      box-sizing: border-box;
-    }
-    ul {
-        font-size: 20px;
-      margin: 0 0 20px 0;
-      margin-top: 20px;
-      text-align: center;
-    }
+  *,
+  *:before,
+  *:after {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+  form {
+    max-width: 300px;
+    margin: 10px auto;
+    margin-top: 30px;
+    padding: 10px 20px;
+    background: #49a1be;
+    border-radius: 8px;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    background: url(../../static/two.jpg) no-repeat;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white;
+  }
+
+  h1 {
+    font-size: 35px;
+    margin: 0 0 20px 0;
+    margin-top: 20px;
+    text-align: center;
+    color: #e2e2e2;
+  }
+  h4 {
+    font-size: 25px;
+    margin: 0 0 20px 0;
+    margin-top: 20px;
+    text-align: center;
+  }
+  h2 {
+    font-size: 22px;
+    margin: 0 0 20px 0;
+    margin-top: 20px;
+    text-align: center;
+  }
+  h3 {
+    font-size: 22px;
+    margin: 0 0 20px 0;
+    margin-top: 20px;
+    text-align: center;
+  }
+  input[type="text"],
+  input[type="password"],
+  input[type="date"],
+  input[type="datetime"],
+  input[type="email"],
+  input[type="number"],
+  input[type="search"],
+  input[type="tel"],
+  input[type="time"],
+  input[type="url"],
+  textarea,
+  select {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    font-size: 16px;
+    height: auto;
+    margin: 0;
+    outline: 0;
+    padding: 10px;
+    width: 100%;
+    background-color: #e8eeef;
+    color: #8a97a0;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03) inset;
+    margin-bottom: 5px;
+  }
+
+  input[type="radio"],
+  input[type="checkbox"] {
+    margin: 0 4px 8px 0;
+  }
+
+  select {
+    padding: 6px;
+    height: 32px;
+    border-radius: 2px;
+  }
+
+  button {
+    align: center;
+    padding: 14px 39px 14px 39px;
+    color: #fff;
+    background-color: #4bc970;
+    font-size: 18px;
+    text-align: center;
+    font-style: normal;
+    border-radius: 5px;
+    width: 50%;
+    border: 1px solid #3ac162;
+    border-width: 1px 1px 3px;
+    box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.1) inset;
+    margin-bottom: 10px;
+    margin-left: 25%;
+  }
+
+  fieldset {
+    margin-bottom: 30px;
+    border: none;
+  }
+
+  legend {
+    font-size: 1.4em;
+    margin-bottom: 10px;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  label.light {
+    font-weight: 300;
+    display: inline;
+  }
+
+  .bikes {
+    margin-top: 0px;
+    text-align: center;
+  }
+  .cont {
+    margin-top: 170px;
+    margin-bottom: 170px;
+  }
+
+  .number {
+    background-color: #5d5fcf;
+    color: #fff;
+    height: 30px;
+    width: 30px;
+    display: inline-block;
+    font-size: 0.8em;
+    margin-right: 4px;
+    line-height: 30px;
+    text-align: center;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.2);
+    border-radius: 100%;
+  }
+
+  @media screen and (min-width: 480px) {
     form {
-      max-width: 300px;
-      margin: 10px auto;
-      margin-top: 30px;
-      padding: 10px 20px;
-      background: #49a1be;
-      border-radius: 8px;
+      max-width: 700px;
     }
-    
-    body {
-        margin: 0;
-        padding: 0;
-        background: url(../../static/two.jpg) no-repeat;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
-        color: white;
-    }
-  
-    h1 {
-      font-size: 35px;
-      margin: 0 0 20px 0;
-      margin-top: 20px;
-      text-align: center;
-    }
-    h4 {
-      font-size: 25px;
-      margin: 0 0 20px 0;
-      margin-top: 20px;
-      text-align: center;
-    }
-    h2 {
-      font-size: 22px;
-      margin: 0 0 20px 0;
-      margin-top: 20px;
-      text-align: center;
-    }
-    h3 {
-      font-size: 22px;
-      margin: 0 0 20px 0;
-      margin-top: 20px;
-      text-align: center;
-    }
-    input[type="text"],
-    input[type="password"],
-    input[type="date"],
-    input[type="datetime"],
-    input[type="email"],
-    input[type="number"],
-    input[type="search"],
-    input[type="tel"],
-    input[type="time"],
-    input[type="url"],
-    textarea,
-    select {
-      background: rgba(255, 255, 255, 0.1);
-      border: none;
-      font-size: 16px;
-      height: auto;
-      margin: 0;
-      outline: 0;
-      padding: 10px;
-      width: 100%;
-      background-color: #e8eeef;
-      color: #8a97a0;
-      box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03) inset;
-      margin-bottom: 5px;
-    }
-  
-    input[type="radio"],
-    input[type="checkbox"] {
-      margin: 0 4px 8px 0;
-    }
-  
-    select {
-      padding: 6px;
-      height: 32px;
-      border-radius: 2px;
-    }
-  
-    button {
-      align : center;
-      padding: 14px 39px 14px 39px;
-      color: #fff;
-      background-color: #4bc970;
-      font-size: 18px;
-      text-align: center;
-      font-style: normal;
-      border-radius: 5px;
-      width: 50%;
-      border: 1px solid #3ac162;
-      border-width: 1px 1px 3px;
-      box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.1) inset;
-      margin-bottom: 10px;
-      margin-left: 25%;
-    }
-  
-    fieldset {
-      margin-bottom: 30px;
-      border: none;
-    }
-  
-    legend {
-      font-size: 1.4em;
-      margin-bottom: 10px;
-    }
-  
-    label {
-      display: block;
-      margin-bottom: 4px;
-    }
-  
-    label.light {
-      font-weight: 300;
-      display: inline;
-    }
-  
-    .bikes {
-      margin-top: 0px;
-      text-align: center;
-    }
-  
-    .number {
-      background-color: #5d5fcf;
-      color: #fff;
-      height: 30px;
-      width: 30px;
-      display: inline-block;
-      font-size: 0.8em;
-      margin-right: 4px;
-      line-height: 30px;
-      text-align: center;
-      text-shadow: 0 1px 0 rgba(255, 255, 255, 0.2);
-      border-radius: 100%;
-    }
-  
-    @media screen and (min-width: 480px) {
-      form {
-        max-width: 700px;
-      }
-    }    
+  }
 </style>
 {% endblock %}

@@ -1,179 +1,190 @@
 {% extends "user/base.html" %}
-{% block title %}Home{% endblock %}
+<!--title-->
+{% block title %}Take Bike{% endblock %}
+<!--body-->
 {% block body %}
 <!--form-->
 <h1>Take Bike</h1>
 <form method="GET">
-    {{ filter.form.as_p }}
-    <button type="submit">Search</button>
+  {{ filter.form.as_p }}
+  <button type="submit">Search</button>
 </form>
 <h1>Available bikes</h1>
 
 <ul>
-    {% for k1, k2 in fin_ans %}
-    <li>
-        
-        
-        <form class="border border-light" action="/payment/" method="GET">
-          {{k2.bike_brand}} -{{k2.bike_model}} -   {{k2.bike_station}} -
-        {{k2.bike_color}} - {{k1.hourly_rent}} - {{k1.daily_rent}} - {{k1.weekly_rent}} 
-            <input type="number" placeholder="" name="bike_rent_number" value="1" required>
-            <select name="rent_select" id="" required>
-                <option value="Hour">Hour</option>
-                <option value="Day">Day</option>
-                <option value="Week">Week</option>
-            </select>
+  {% for k1, k2 in fin_ans %}
+  <li>
+    <form class="border border-light" action="/payment/" method="GET">
+      {{k2.bike_brand}} -{{k2.bike_model}} - {{k2.bike_station}} -
+      {{k2.bike_color}} - {{k1.hourly_rent}} - {{k1.daily_rent}} -
+      {{k1.weekly_rent}}
+      <input
+        type="number"
+        placeholder=""
+        name="bike_rent_number"
+        value="1"
+        required
+      />
+      <select name="rent_select" id="" required>
+        <option value="Hour">Hour</option>
+        <option value="Day">Day</option>
+        <option value="Week">Week</option>
+      </select>
 
-            <input type="text" value="{{k2.bike_number}}" name="selected_bike" id="sel_bike">
+      <input
+        type="text"
+        value="{{k2.bike_number}}"
+        name="selected_bike"
+        id="sel_bike"
+      />
 
-            <button  type="submit" >Take and Go for Payment</button>
-        </form>
-    </li>
-    <!-- <a href="{% url 'payment' %}">Go For Payment</a> -->
-    {% endfor %}
+      <button type="submit">Take and Go for Payment</button>
+    </form>
+  </li>
+  <!-- <a href="{% url 'payment' %}">Go For Payment</a> -->
+  {% endfor %}
 </ul>
 <style>
-    *,
-    *:before,
-    *:after {
-      -moz-box-sizing: border-box;
-      -webkit-box-sizing: border-box;
-      box-sizing: border-box;
-    }
-  
-    body {
-      margin: 0;
-      padding: 0;
-      background: url(../../static/two.jpg) no-repeat;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: cover;
-      color: white;
-    }
-    ul {
-        font-size: 20px;
-      margin: 0 0 20px 0;
-      margin-top: 20px;
-      text-align: center;
-    }
+  *,
+  *:before,
+  *:after {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: "Nunito", sans-serif;
+    background: url(../../static/two.jpg) no-repeat;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: #384047;
+  }
+
+  form {
+    max-width: 300px;
+    margin: 10px auto;
+    margin-top: 30px;
+    padding: 10px 20px;
+    background: #f4f7f8;
+    border-radius: 8px;
+  }
+
+  h1 {
+    font-size: 35px;
+    margin: 0 0 20px 0;
+    margin-top: 20px;
+    text-align: center;
+    color: #e2e2e2;
+  }
+
+  input[type="text"],
+  input[type="password"],
+  input[type="date"],
+  input[type="datetime"],
+  input[type="email"],
+  input[type="number"],
+  input[type="search"],
+  input[type="tel"],
+  input[type="time"],
+  input[type="url"],
+  textarea,
+  select {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    font-size: 16px;
+    height: auto;
+    margin: 0;
+    outline: 0;
+    padding: 10px;
+    width: 100%;
+    background-color: #e8eeef;
+    color: #8a97a0;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03) inset;
+    margin-bottom: 5px;
+  }
+
+  input[type="radio"],
+  input[type="checkbox"] {
+    margin: 0 4px 8px 0;
+  }
+
+  select {
+    padding: 6px;
+    height: 32px;
+    border-radius: 2px;
+  }
+
+  button {
+    align: center;
+    padding: 14px 39px 14px 39px;
+    color: #fff;
+    background-color: #4bc970;
+    font-size: 18px;
+    text-align: center;
+    font-style: normal;
+    border-radius: 5px;
+    width: 50%;
+    border: 1px solid #3ac162;
+    border-width: 1px 1px 3px;
+    box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.1) inset;
+    margin-bottom: 10px;
+    margin-left: 25%;
+    background: -webkit-linear-gradient(to right, #019e35 0%, #02e64d 100%);
+    background: -moz-linear-gradient(to right, #019e35 0%, #02e64d 100%);
+    background: linear-gradient(to right, #019e35 0%, #02e64d 100%);
+  }
+
+  fieldset {
+    margin-bottom: 30px;
+    border: none;
+  }
+
+  legend {
+    font-size: 1.4em;
+    margin-bottom: 10px;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  label.light {
+    font-weight: 300;
+    display: inline;
+  }
+
+  .bikes {
+    margin-top: 0px;
+  }
+
+  .number {
+    background-color: #5fcf80;
+    color: #fff;
+    height: 30px;
+    width: 30px;
+    display: inline-block;
+    font-size: 0.8em;
+    margin-right: 4px;
+    line-height: 30px;
+    text-align: center;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.2);
+    border-radius: 100%;
+  }
+
+  @media screen and (min-width: 480px) {
     form {
-      max-width: 300px;
-      margin: 10px auto;
-      margin-top: 30px;
-      padding: 10px 20px;
-      background: #49a1be;
-      border-radius: 8px;
+      max-width: 700px;
     }
-  
-    h1 {
-      font-size: 35px;
-      margin: 0 0 20px 0;
-      margin-top: 20px;
-      text-align: center;
-    }
-  
-    input[type="text"],
-    input[type="password"],
-    input[type="date"],
-    input[type="datetime"],
-    input[type="email"],
-    input[type="number"],
-    input[type="search"],
-    input[type="tel"],
-    input[type="time"],
-    input[type="url"],
-    textarea,
-    select {
-      background: rgba(255, 255, 255, 0.1);
-      border: none;
-      font-size: 16px;
-      height: auto;
-      margin: 0;
-      outline: 0;
-      padding: 10px;
-      width: 100%;
-      background-color: #e8eeef;
-      color: #8a97a0;
-      box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03) inset;
-      margin-bottom: 5px;
-    }
-  
-    input[type="radio"],
-    input[type="checkbox"] {
-      margin: 0 4px 8px 0;
-    }
-  
-    select {
-      padding: 6px;
-      height: 32px;
-      border-radius: 2px;
-    }
-  
-    button {
-      align : center;
-      padding: 14px 39px 14px 39px;
-      color: #fff;
-      background-color: #4bc970;
-      font-size: 18px;
-      text-align: center;
-      font-style: normal;
-      border-radius: 5px;
-      width: 50%;
-      border: 1px solid #3ac162;
-      border-width: 1px 1px 3px;
-      box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.1) inset;
-      margin-bottom: 10px;
-      margin-left: 25%;
-    }
-  
-    fieldset {
-      margin-bottom: 30px;
-      border: none;
-    }
-  
-    legend {
-      font-size: 1.4em;
-      margin-bottom: 10px;
-    }
-  
-    label {
-      display: block;
-      margin-bottom: 4px;
-    }
-  
-    label.light {
-      font-weight: 300;
-      display: inline;
-    }
-  
-    .bikes {
-      margin-top: 0px;
-      text-align: center;
-    }
-  
-    .number {
-      background-color: #5d5fcf;
-      color: #fff;
-      height: 30px;
-      width: 30px;
-      display: inline-block;
-      font-size: 0.8em;
-      margin-right: 4px;
-      line-height: 30px;
-      text-align: center;
-      text-shadow: 0 1px 0 rgba(255, 255, 255, 0.2);
-      border-radius: 100%;
-    }
-  
-    @media screen and (min-width: 480px) {
-      form {
-        max-width: 700px;
-      }
-    }    
+  }
 </style>
 <div class="center">
-    <script src="/docs/5.0/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
-  
+  <script
+    src="/docs/5.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+    crossorigin="anonymous"
+  ></script>
 </div>
 {% endblock %}
