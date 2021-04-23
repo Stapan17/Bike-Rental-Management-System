@@ -238,8 +238,19 @@
             transition: all 250ms ease-in-out 0s;
         }
 
+        .navbar{
+            background: #252525;
+            border-radius: 0px;
+            padding: 30px;
+            margin-bottom: 0px;
+        }
+
         .navbar-brand {
             font-size: 45px;
+           background: -webkit-linear-gradient(#ff8d1e, #CF1512);
+           -webkit-background-clip: text;
+           -webkit-text-fill-color: transparent;
+           margin-left: 5px;
         }
 
         .navbar-nav {}
@@ -251,7 +262,7 @@
 
         .nav-item {
             text-align: center;
-            font-size: 23px;
+            font-size: 21px;
             margin-left: 10px;
             height: auto;
         }
@@ -260,18 +271,13 @@
             color: #ff8d1e;
         }
 
-        .navbar-brand {
-            font-size: 45px;
-            margin-left: 5px;
-        }
-
         .cont {
             margin-left: 50px auto;
         }
 
         a:hover {
             color: #ff8d1e;
-        }
+        };
     </style>
 
 </head>
@@ -279,7 +285,7 @@
 <body>
 
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark">
         <a class="navbar-brand" href="{% url 'home' %}">ONLINE BRS</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -315,8 +321,8 @@
             {% if user.is_authenticated %}
             <ul class="navbar-nav ml-auto mr-5 float-right">
 
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button"
+                <li class="nav-item dropdown" >
+                    <a class="nav-link dropdown-toggle " onmouseover="this.style.color='#ff8d1e'" onmouseout="this.style.color='white'" href="#" id="navbarDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         {{request.user}}
                     </a>
