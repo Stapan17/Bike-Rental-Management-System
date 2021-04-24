@@ -1,54 +1,57 @@
 {% extends "user/base.html" %}
-
-{% block style %}
-.center {
-position: absolute;
-text-align: center;
-left: 50%;
-top: 50%;
-transform: translate(-50%, -50%);
-}
-{% endblock %}
-
+<!--style-->
+{% block style %} .center { position: absolute; text-align: center; left: 50%;
+top: 50%; transform: translate(-50%, -50%); } {% endblock %}
+<!--body-->
 {% block body %}
 <div class="center">
-    <h3>
-        Congratulations, Payment Successful!! <br>
-        Your Bike is Ready at service station, Go and Enjoy.
-    </h3>
-    <h5>
-        <a href="http://127.0.0.1:8000/">
-            Go to Home
-        </a>
-    </h5>
-    <h5>
-        <a href="http://127.0.0.1:8000/contact/">
-            Contact Us
-        </a>
-    </h5>
+  <h3>
+    Congratulations, Payment Successful!! <br />
+    Your Bike is Ready at service station, Go and Enjoy.
+  </h3>
+  <h5>
+    <a
+      href="{% url 'home' %}"
+      style="text-decoration: none"
+      onmouseover="this.style.color='#ff8d1e'"
+      onmouseout="this.style.color='white'"
+    >
+      Go to Home
+    </a>
+  </h5>
+  <h5>
+    <a
+      href="{% url 'contact' %}"
+      style="text-decoration: none"
+      onmouseover="this.style.color='#ff8d1e'"
+      onmouseout="this.style.color='white'"
+    >
+      Contact Us
+    </a>
+  </h5>
 </div>
 <style>
-    h3{
-        font-size: 35px;
-      margin: 0 0 20px 0;
-      margin-top: 20px;
-      text-align: center;
-    }
-    h5{
-        font-size: 30px;
-      margin: 0 0 20px 0;
-      margin-top: 20px;
-      text-align: center;
-    }
-    body {
-        margin: 0;
-        padding: 0;
-        background: url(../../static/two.jpg) no-repeat;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
-        color: white;
-    }
+  h3 {
+    font-size: 35px;
+    margin: 0 0 20px 0;
+    margin-top: 20px;
+    text-align: center;
+  }
+  h5 {
+    font-size: 30px;
+    margin: 0 0 20px 0;
+    margin-top: 20px;
+    text-align: center;
+  }
+  body {
+    margin: 0;
+    padding: 0;
+    background: url(../../static/three.jpg) no-repeat;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white;
+  }
 </style>
 
 {% endblock%}

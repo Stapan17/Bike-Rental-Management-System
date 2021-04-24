@@ -1,95 +1,143 @@
 {% extends "user/base.html" %}
+<!--title-->
 {% block title %}Payment{% endblock %}
+<!--body-->
 {% block body %}
 
 <style>
-    #sel_bike1,
-    #sel_bike2,
-    #sel_bike3 {
-        display: none;
-    }
-    body{
-      margin: 0;
-      padding: 0;
-      background: url(../../static/two.jpg) no-repeat;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: cover;
-      color: black;
-    }
- 
-    table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 80%;
-  margin-left:10%;
-  margin-bottom:20px;
-  margin-top:20px;
-}
+  #sel_bike1,
+  #sel_bike2,
+  #sel_bike3 {
+    display: none;
+  }
+  body {
+    margin: 0;
+    padding: 0;
+    background: url(../../static/three.jpg) no-repeat;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: black;
+  }
 
-td {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 10px 0 10px 20px;
-}
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 80%;
+    margin-left: 10%;
+    margin-bottom: 20px;
+    margin-top: 20px;
+  }
 
-tr:nth-child(even) {
-  background-color: #dddddd;
-}
-tr:nth-child(odd) {
-  background-color: #dddd;
-}
+  td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 10px 0 10px 20px;
+  }
+
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+  tr:nth-child(odd) {
+    background-color: #dddd;
+  }
 </style>
 
+<center>
+  <h1 style="color: white; padding-top: 30px">Payment details</h1>
 
-<center><h1 style="color:white;padding-top:30px;">Payment details</h1>
+  <div
+    style="
+      text-align: center;
+      margin-top: 30px;
+      margin-bottom: 50px;
+      height: 480px;
+      width: 500px;
+      background: #69207b;
+      border-radius: 5px;
+    "
+  >
+    <p
+      style="
+        font-size: 30px;
+        margin: 0 0 20px 0;
+        margin-top: 40px;
+        text-align: center;
+        color: white;
+        padding-top: 20px;
+      "
+    >
+      You are paying rent for ...
+    </p>
 
-<div style="text-align:center;margin-top:30px;margin-bottom:20px;height:450px;width:500px;background:#49a1be;">
-<p style ="font-size:30px; padding-top:10px;text-align:center;padding-left:0px;color:black">You are paying rent for ...</p>
+    <table>
+      <tr>
+        <td>Bike Number</td>
+        <td>{{selected_bike.bike_number}}</td>
+      </tr>
+      <tr>
+        <td>Bike color</td>
+        <td>{{selected_bike.bike_color}}</td>
+      </tr>
+      <tr>
+        <td>Bike Type</td>
+        <td>{{selected_bike.bike_type}}</td>
+      </tr>
+      <tr>
+        <td>Bike Model</td>
+        <td>{{selected_bike.bike_model}}</td>
+      </tr>
+      <tr>
+        <td>Bike Bike Brand</td>
+        <td>{{selected_bike.bike_brand}}</td>
+      </tr>
+      <tr>
+        <td>Bike Station</td>
+        <td>{{selected_bike.bike_station}}</td>
+      </tr>
+      <tr>
+        <td>Total Time</td>
+        <td>{{bike_rent_number}} {{bike_rent}}</td>
+      </tr>
 
+      {% ifequal bike_rent "Hour" %}
+      <!---->
+      {% widthratio bike_rent_number 1 rented_BIke.hourly_rent as amount %}
+      <!---->
+      {% endifequal %} {% ifequal bike_rent "Day" %}
+      <!---->
+      {% widthratio bike_rent_number 1 rented_BIke.daily_rent as amount%}
+      <!---->
+      {% endifequal %} {% ifequal bike_rent "Week" %}
+      <!---->
+      {% widthratio bike_rent_number 1 rented_BIke.weekly_rent as amount %}
+      <!---->
+      {% endifequal %}
 
- <table>
- <tr><td>Bike Number</td><td>{{selected_bike.bike_number}}</td></tr>
- <tr>
- <td>Bike color</td>
- <td>{{selected_bike.bike_color}}</td>
- </tr>
- <tr><td>Bike Type</td><td>{{selected_bike.bike_type}}</td></tr>
- <tr><td>Bike Model</td><td>{{selected_bike.bike_model}}</td></tr>
- <tr><td>Bike Bike Brand</td><td>{{selected_bike.bike_brand}}</td></tr>
- <tr><td>Bike Station</td><td>{{selected_bike.bike_station}}</td></tr>
- <tr><td>Total Time</td><td>{{bike_rent_number}}  {{bike_rent}}</td></tr>
- 
+      <tr>
+        <td>Total Amount</td>
+        <td>{{ amount }} INR</td>
+      </tr>
+    </table>
 
-
-{% ifequal bike_rent "Hour" %}
-    {% widthratio bike_rent_number 1 rented_BIke.hourly_rent as amount %}
-    {% endifequal %}
-    
-    {% ifequal bike_rent "Day" %}
-    {% widthratio bike_rent_number 1 rented_BIke.daily_rent as amount %}
-    {% endifequal %}
-    
-    {% ifequal bike_rent "Week" %}
-	 {% widthratio bike_rent_number 1 rented_BIke.weekly_rent as amount %}
-    {% endifequal %}
-
- <tr><td>Total Amount</td><td>{{ amount }} INR</td></tr>
- </table>
-
-<form action="" method="POST">
-
-    {% csrf_token %}
-    <!-- RAZORPAY INTEGRATION HERE -->
-    <script src="https://checkout.razorpay.com/v1/checkout.js" data-key="rzp_test_pQD1ejHNOtqS0Y" data-amount= {% widthratio amount 1 100 %}
-        data-currency="INR" data-order_id="{{payment.id}}" data-buttontext="Make Payment" data-name="App BRS"
+    <form action="" method="POST">
+      {% csrf_token %}
+      <!-- RAZORPAY INTEGRATION HERE -->
+      <script
+        src="https://checkout.razorpay.com/v1/checkout.js"
+        data-key="rzp_test_pQD1ejHNOtqS0Y"
+        data-amount="{% widthratio amount 1 100%}"
+        data-currency="INR"
+        data-order_id="{{payment.id}}"
+        data-buttontext="Make Payment"
+        data-name="App BRS"
         data-description="Payment for {{bike.bike_model}}"
         data-image="https://i.pinimg.com/originals/e0/e9/b1/e0e9b132034a2977f88b322635acf523.png"
-        data-prefill.name="Online Brs" data-prefill.email="{{request.user.email}}" data-theme.color="#6600ff">
-        </script>
-        
-</form>
-
-</div>
+        data-prefill.name="Online Brs"
+        data-prefill.email="{{request.user.email}}"
+        data-theme.color="#6600ff"
+      ></script>
+    </form>
+  </div>
 </center>
 {% endblock %}
