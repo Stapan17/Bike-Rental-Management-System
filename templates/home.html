@@ -59,7 +59,7 @@
       <th>Color</th>
       <th>Bike Model</th>
       <th>Bike Number</th>
-      <th>Rent</th>
+      <!-- <th>Rent</th> -->
     </tr>
     {% for bike in filter.qs %}
 
@@ -69,7 +69,6 @@
       <td>{{bike.bike_color}}</td>
       <td>{{bike.bike_model}}</td>
       <td>{{bike.bike_number}}</td>
-      <td>{{bike.bike_rent}}</td>
     </tr>
 
     <tr>
@@ -106,10 +105,12 @@
     margin-top: 50px;
     border-radius: 3px;
   }
+
   tr {
     background-color: #f5f5f5;
-    
+
   }
+
   th,
   td {
     padding: 15px;
@@ -117,9 +118,11 @@
     border-bottom: 1px solid #ccc;
     text-align: center;
   }
+
   .clickable-row:hover {
     background-color: #cdcdcd;
   }
+
   .head {
     color: white;
     background: green;
@@ -221,6 +224,7 @@
     background: -moz-linear-gradient(to right, #019e35 0%, #02e64d 100%);
     background: linear-gradient(to right, #019e35 0%, #02e64d 100%);
   }
+
   .btnSub:hover {
     background: -webkit-linear-gradient(to right, #02e64d 0%, #019e35 100%);
     background: -moz-linear-gradient(to right, #02e64d 0%, #019e35 100%);
@@ -233,6 +237,7 @@
     text-align: center;
     margin: 40px;
   }
+
   fieldset {
     margin-bottom: 30px;
     border: none;
@@ -279,10 +284,7 @@
   }
 </style>
 
-<script
-  src="/docs/5.0/dist/js/bootstrap.bundle.min.js"
-  integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
-  crossorigin="anonymous"
-></script>
+<script src="/docs/5.0/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
 
 {% endblock %}

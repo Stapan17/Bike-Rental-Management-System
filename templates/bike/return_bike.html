@@ -12,9 +12,7 @@
       <div class="Inn">
         <h3>
           Your bike is
-          <strong
-            >{{current_bike.bike_brand}} {{current_bike.bike_model}}</strong
-          >
+          <strong>{{current_bike.bike_brand}} {{current_bike.bike_model}}</strong>
           of <strong>{{current_bike.bike_color}}</strong> color.<br /><br />
           Your bike Model number is
           <strong>{{current_bike.bike_number}}</strong> and Type
@@ -36,20 +34,16 @@
       <hr />
       <br />
 
+      {% if error_flag %} <h1 style="color: black;"> Error : {{error}} </h1> {% endif %}
       <form action="" method="POST">
         {% csrf_token %}
         <h2>This form should only filled by our employees.</h2>
-        <input
-          type="text"
-          name="emp_superkey"
-          placeholder="Enter Valid Superkey"
-          required
-        /><br />
+        <input type="text" name="emp_superkey" placeholder="Enter Valid Superkey" required /><br />
         <button type="submit">Take Bike</button>
       </form>
-      {% if error_flag %} Error : {{error}} {% endif %} {% else %}
+      {% else %}
       <div class="cont">
-        <h1>You haven't taken any bike yet.</h1>
+        <h1 style="color: black;">You haven't taken any bike yet.</h1>
       </div>
       {% endif %}
     </article>
@@ -77,6 +71,7 @@
     padding: 2em;
     max-width: auto;
   }
+
   .Inn {
     font-size: 13px;
     color: black;
@@ -94,6 +89,7 @@
     border-radius: 5px;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1), 0 20px 20px rgba(0, 0, 0, 0.05);
   }
+
   *,
   *:before,
   *:after {
@@ -101,6 +97,7 @@
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
   }
+
   form {
     max-width: 300px;
     margin: 10px auto;
@@ -127,24 +124,28 @@
     text-align: center;
     color: #e2e2e2;
   }
+
   h4 {
     font-size: 25px;
     margin: 0 0 20px 0;
     margin-top: 20px;
     text-align: center;
   }
+
   h2 {
     font-size: 22px;
     margin: 0 0 20px 0;
     margin-top: 20px;
     text-align: center;
   }
+
   h3 {
     font-size: 22px;
     margin: 0 0 20px 0;
     margin-top: 20px;
     text-align: center;
   }
+
   input[type="text"],
   input[type="password"],
   input[type="date"],
@@ -223,6 +224,7 @@
     margin-top: 0px;
     text-align: center;
   }
+
   .cont {
     margin-top: 170px;
     margin-bottom: 170px;
