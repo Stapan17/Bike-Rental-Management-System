@@ -1,5 +1,4 @@
 razorpay==1.2.0
-whitenoise==5.2.0
 PyMySQL==1.0.2
 django_filter==2.4.0
 Django==1.11.29
