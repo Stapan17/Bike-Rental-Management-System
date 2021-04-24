@@ -1,99 +1,212 @@
 {% extends "user/base.html" %}
+<!--title-->
 {% block title %}Register{% endblock %}
+<!--body-->
 {% block body %}
 
 <style>
-    body {
-        margin: 0;
-        padding: 0;
-        background: url(../../static/two.jpg) no-repeat;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
-        color: white;
-    }
+  body {
+    margin: 0;
+    padding: 0;
+    background: url(../../static/three.jpg) no-repeat;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white;
+  }
 
-    .headered {
-        color: white;
-        background-color: #ff8d1e;
-        height: 70px;
-        width: 45%;
-        text-align: center;
-        border-radius: 10px;
-        margin: 50px 0;
-        padding-top: 16px;
-    }
+  .headered {
+    color: white;
+    background-color: #ff8d1e;
+    text-shadow: 1px 1px grey;
+    height: 50px;
+    width: 35%;
+    text-align: center;
+    border-radius: 7px;
+    margin: 50px 0;
+    font-size: 30px;
+    padding-top: 10px;
+  }
 
-    .btn1 {
-        height: 60px;
-        font-size: 30px;
-        font-weight: 535;
-        width: auto;
-        color: white;
-        border-radius: 15px;
-        margin: 15px;
-        padding: 0 15px;
-    }
+  .btn1 {
+    height: 50px;
+    font-size: 20px;
+    width: 250px;
+    color: white;
+    border-radius: 7px;
+    margin: 10px;
+    padding: 0 15px;
+  }
 
-    .inlogin {
-        margin-top: 10px;
-    }
+  .inlogin {
+    margin-top: 10px;
+  }
 
-    .form-control {
-        width: 30%;
-        margin: 20px;
-        padding: 10px;
-        height: 60px;
-        font-size: 35px;
-        border-radius: 12px;
-        border-style: solid;
-        border-width: 2px 5px;
-        border-color: #1E90FF;
-        text-align: center;
-    }
+  .form-control {
+    width: 30%;
+    margin: 25px;
+    padding: 10px;
+    height: 50px;
+    font-size: 25px;
+    border-radius: 7px;
+    border-style: solid;
+    border-width: 2px 2px;
+    border-color: #353230;
+    text-align: center;
+  }
+
+  .txt {
+    font-size: 20px;
+    padding-top: 10px;
+  }
 </style>
 
 <center>
-    <h1 class="headered">SignUP</h1>
+  <h1 class="headered">SignUP</h1>
 
-    <form action="" method="POST" enctype="multipart/form-data">
+  <form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
 
-        {% csrf_token %}
+    <div class="login">
+      <div class="inlogin">
+        <input
+          type="text"
+          name="username"
+          class="form-control"
+          class="lab2"
+          maxlength="150"
+          required
+          id="id_username"
+          placeholder="Username"
+        />
 
-        <div class="login">
-            <div class="inlogin">
+        <input
+          type="text"
+          name="first_name"
+          class="form-control"
+          class="lab2"
+          maxlength="150"
+          id="id_first_name"
+          placeholder="First Name"
+        />
 
-                <input type="text" name="username" class="form-control" class="lab2" maxlength="150" required
-                    id="id_username" placeholder="Username">
+        <input
+          type="text"
+          name="last_name"
+          class="form-control"
+          class="lab2"
+          maxlength="150"
+          id="id_last_name"
+          placeholder="Last Name"
+        />
 
-                <input type="text" name="first_name" class="form-control" class="lab2" maxlength="150"
-                    id="id_first_name" placeholder="First Name">
+        <input
+          type="email"
+          name="email"
+          class="form-control"
+          class="lab2"
+          maxlength="254"
+          id="id_email"
+          placeholder="Email"
+        />
 
-                <input type="text" name="last_name" class="form-control" class="lab2" maxlength="150" id="id_last_name"
-                    placeholder="Last Name">
+        <input
+          type="password"
+          name="password"
+          class="form-control"
+          class="lab2"
+          required
+          id="id_password"
+          placeholder="Password"
+        />
 
-                <input type="email" name="email" class="form-control" class="lab2" maxlength="254" id="id_email"
-                    placeholder="Email">
+        <input
+          type="text"
+          name="mobile_number"
+          class="form-control"
+          class="lab2"
+          maxlength="12"
+          required
+          id="id_mobile_number"
+          placeholder="Mobile Number"
+        />
 
-                <input type="password" name="password" class="form-control" class="lab2" required id="id_password"
-                    placeholder="Password">
+        <select
+          name=""
+          id="proof_selected"
+          onchange="fun()"
+          style="
+            padding: 10px 10px 10px 10px;
+            padding-left: 125px;
+            width: 30%;
+            color: #94a295;
+            font-size: 25px;
+            border-radius: 7px;
+            border-style: solid;
+            border-width: 2px 2px;
+            border-color: #353230;
+            background-color: white;
+            text-align: center;
+          "
+        >
+          <option class="form-control" style="text-align: center">
+            Select Proof
+          </option>
+          <option value="Aadhaar Card" class="form-control">
+            Aadhaar Card
+          </option>
+          <option value="Driving Licence" class="form-control">
+            Driving Licence
+          </option>
+          <option value="Passport" class="form-control">Passport</option>
+        </select>
 
-                <input type="text" name="mobile_number" class="form-control" class="lab2" maxlength="12" required
-                    id="id_mobile_number" placeholder="Mobile Number">
+        <input
+          type="text"
+          name="proof_of_user"
+          class="form-control"
+          class="lab2"
+          maxlength="20"
+          required
+          id="id_proof_of_user"
+          placeholder="Proof Of User"
+        />
+      </div>
 
-                <input type="text" name="proof_of_user" class="form-control" class="lab2" maxlength="20" required
-                    id="id_proof_of_user" placeholder="Proof Of User">
-            </div>
+      <button
+        type="submit"
+        id="Register"
+        class="btn-outline-success vip btn1"
+        value="Register"
+      >
+        SignUP
+      </button>
+    </div>
+  </form>
 
-            <button type="submit" class="btn-outline-success vip btn1" value="Register">SignUP</button>
-
-        </div>
-
-    </form>
-
-    <a href="{% url 'login_user' %}"><button type="submit" class="btn-outline-primary btn1" value="">SignIN
-            here</button></a><br />
-    <a href="{% url 'reset_password' %}"><button type="submit" class="btn-outline-danger btn1"
-            style="margin-bottom: 50px;" value="">Forgot Password</button></a><br />
+  <a href="{% url 'login_user' %}"
+    ><button type="submit" class="btn-outline-primary btn1" value="">
+      SignIN here
+    </button></a
+  ><br />
+  <a href="{% url 'reset_password' %}"
+    ><button
+      type="submit"
+      class="btn-outline-danger btn1"
+      style="margin-bottom: 50px"
+      value=""
+    >
+      Forgot Password
+    </button></a
+  ><br />
 </center>
+
+<script>
+  function fun() {
+    var selected = "Enter ";
+    selected += document.getElementById("proof_selected").value;
+    selected += " Number";
+    document.getElementById("id_proof_of_user").placeholder = selected;
+  }
+</script>
 {% endblock %}

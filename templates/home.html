@@ -51,11 +51,38 @@
 <div class="bikes">
   <h1>---</h1>
   <h1>Available Bikes</h1>
-  <ul>
+
+  <table>
+    <tr class="head">
+      <th>Station</th>
+      <th>Manufacturer</th>
+      <th>Color</th>
+      <th>Bike Model</th>
+      <th>Bike Number</th>
+      <th>Rent</th>
+    </tr>
     {% for bike in filter.qs %}
-    <li>{{bike.bike_number}} - {{bike.bike_color}}</li>
-    {% endfor %}
-  </ul>
+
+    <tr class="clickable-row" href="{% url 'take_bike'%}">
+      <td>{{bike.bike_station}}</td>
+      <td>{{bike.bike_brand}}</td>
+      <td>{{bike.bike_color}}</td>
+      <td>{{bike.bike_model}}</td>
+      <td>{{bike.bike_number}}</td>
+      <td>{{bike.bike_rent}}</td>
+    </tr>
+
+    <tr>
+      {% endfor %}
+    </tr>
+  </table>
+</div>
+
+<div class="center">
+  <a class="btnSub" href="{% url 'take_bike' %}" style="text-decoration: none">
+    Take Bike
+  </a>
+  <h3> Click here to take bike at rent<h3>
 </div>
 
 <style>
@@ -70,6 +97,32 @@
   body {
     font-family: "Nunito", sans-serif;
     color: #384047;
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 15px;
+    margin-top: 50px;
+    border-radius: 3px;
+  }
+  tr {
+    background-color: #f5f5f5;
+    
+  }
+  th,
+  td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+  }
+  .clickable-row:hover {
+    background-color: #cdcdcd;
+  }
+  .head {
+    color: white;
+    background: green;
   }
 
   form {
@@ -127,7 +180,7 @@
 
   button {
     align: center;
-    padding: 14px 39px 14px 39px;
+    padding: 10px 30px 10px 30px;
     color: #fff;
     background-color: #4bc970;
     font-size: 18px;
@@ -145,6 +198,41 @@
     background: linear-gradient(to right, #019e35 0%, #02e64d 100%);
   }
 
+  button:hover {
+    background: -webkit-linear-gradient(to right, #02e64d 0%, #019e35 100%);
+    background: -moz-linear-gradient(to right, #02e64d 0%, #019e35 100%);
+    background: linear-gradient(to right, #02e64d 0%, #019e35 100%);
+  }
+
+  .btnSub {
+    padding: 10px 30px 10px 30px;
+    color: #fff;
+    background-color: #4bc970;
+    font-size: 18px;
+    text-align: center;
+    font-style: normal;
+    border-radius: 5px;
+    width: 50%;
+    border: 1px solid #3ac162;
+    border-width: 1px 1px 3px;
+    box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.1) inset;
+    margin-bottom: 10px;
+    background: -webkit-linear-gradient(to right, #019e35 0%, #02e64d 100%);
+    background: -moz-linear-gradient(to right, #019e35 0%, #02e64d 100%);
+    background: linear-gradient(to right, #019e35 0%, #02e64d 100%);
+  }
+  .btnSub:hover {
+    background: -webkit-linear-gradient(to right, #02e64d 0%, #019e35 100%);
+    background: -moz-linear-gradient(to right, #02e64d 0%, #019e35 100%);
+    background: linear-gradient(to right, #02e64d 0%, #019e35 100%);
+    color: white;
+  }
+
+  .center {
+    align: center;
+    text-align: center;
+    margin: 40px;
+  }
   fieldset {
     margin-bottom: 30px;
     border: none;
@@ -166,7 +254,8 @@
   }
 
   .bikes {
-    margin-top: 0px;
+    margin: 70px;
+    border-radius: 3px;
   }
 
   .number {

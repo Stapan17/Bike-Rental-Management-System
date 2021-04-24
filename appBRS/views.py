@@ -208,3 +208,6 @@ def contact(request):
 
 def admin(request):
     return render(request, 'admin.html')
+
+def profile(request):
+    return render(request, 'user/profile.html')

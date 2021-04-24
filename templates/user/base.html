@@ -54,7 +54,6 @@
         }
 
         .footer-copyright nav ul li {
-            border-left: 1px solid #505050;
             display: inline-block;
             line-height: 12px;
             margin: 0;
@@ -328,7 +327,7 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <span class="dropdown-item"></span>
-                        <a class="dropdown-item" href="#">Profile</a>
+                        <a class="dropdown-item" href="{% url 'profile' %}">Profile</a>
                         <a class="dropdown-item" href="{% url 'reset_password' %}">Change Password</a>
                         <a class="dropdown-item" href="{% url 'logout_user' %}">Logout</a>
                     </div>
@@ -398,9 +397,9 @@
                                 <li>
                                     <div class="thumb-content"><a href="{% url 'admin' %}">Admin</a></div>
                                 </li>
-                                <li>
+                                {% comment %} <li>
                                     <div class="thumb-content"><a href="#.">About</a></div>
-                                </li>
+                                </li> {% endcomment %}
                             </ul>
                         </div>
                     </div>
