@@ -4,38 +4,92 @@
 <!--body-->
 {% block body%}
 
-<h1>Return Bike</h1>
+<div class="page">
+  <h1>Return Bike</h1>
+  <div class="archive">
+    <article class="article">
+      {% if flag %}
+      <div class="Inn">
+        <h3>
+          Your bike is
+          <strong>{{current_bike.bike_brand}} {{current_bike.bike_model}}</strong>
+          of <strong>{{current_bike.bike_color}}</strong> color.<br /><br />
+          Your bike Model number is
+          <strong>{{current_bike.bike_number}}</strong> and Type
+          <strong>{{current_bike.bike_type}}</strong>.<br />
 
-{% if flag %}
-<h3>
-  your bike is {{current_bike.bike_brand}} {{current_bike.bike_model}} of
-  {{current_bike.bike_color}} color .<br /><br />
-  your bike id number is {{current_bike.bike_number}} and type
-  {{current_bike.bike_type}}.<br />
-  the station is {{current_bike.bike_station}}<br />
-</h3>
-<h4>so you want to return bike, okay great.</h4>
-<h4>
-  Tell there station any of the employee to enter his/her Crediential and take
-  bike.
-</h4>
-<form action="" method="POST">
-  {% csrf_token %}
-  <h2>This form should only filled by our employees.</h2>
-  <input
-    type="text"
-    name="emp_superkey"
-    placeholder="Enter Your Superkey"
-    required
-  /><br />
-  <button type="submit">Take Bike</button>
-</form>
-{% if error_flag %} Error : {{error}} {% endif %} {% else %}
-<div class="cont">
-  <h1>You haven't taken any bike yet.</h1>
+          The Station is <strong>{{current_bike.bike_station}}</strong><br />
+        </h3>
+        <br />
+        <hr />
+        <br />
+        <h4>So you want to return bike, Okay great.</h4>
+        <h4>
+          Verify and enter credientials only from the employee at our
+          Station.<br />
+          He/she will enter the key below for returning bike.
+        </h4>
+      </div>
+      <br />
+      <hr />
+      <br />
+
+      {% if error_flag %} <h1 style="color: black;"> Error : {{error}} </h1> {% endif %}
+      <form action="" method="POST">
+        {% csrf_token %}
+        <h2>This form should only filled by our employees.</h2>
+        <input type="text" name="emp_superkey" placeholder="Enter Valid Superkey" required /><br />
+        <button type="submit">Take Bike</button>
+      </form>
+      {% else %}
+      <div class="cont">
+        <h1 style="color: black;">You haven't taken any bike yet.</h1>
+      </div>
+      {% endif %}
+    </article>
+  </div>
 </div>
-{% endif %}
 <style>
+  hr {
+    /*dummy content*/
+    height: 6px;
+    border: none;
+    background: rgba(0, 0, 0, 0.4);
+  }
+
+  hr:last-child {
+    /*dummy content*/
+    margin-right: 60%;
+  }
+
+  hr.image {
+    /*dummy content*/
+    padding-bottom: 50%;
+  }
+
+  .page {
+    padding: 2em;
+    max-width: auto;
+  }
+
+  .Inn {
+    font-size: 13px;
+    color: black;
+  }
+
+  .archive {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(390px, 1fr));
+    grid-gap: 3em;
+  }
+
+  .article {
+    padding: 1em;
+    background: #d1cfcd;
+    border-radius: 5px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1), 0 20px 20px rgba(0, 0, 0, 0.05);
+  }
+
   *,
   *:before,
   *:after {
@@ -43,6 +97,7 @@
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
   }
+
   form {
     max-width: 300px;
     margin: 10px auto;
@@ -55,7 +110,7 @@
   body {
     margin: 0;
     padding: 0;
-    background: url(../../static/two.jpg) no-repeat;
+    background: url(../../static/three.jpg) no-repeat;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -69,24 +124,28 @@
     text-align: center;
     color: #e2e2e2;
   }
+
   h4 {
     font-size: 25px;
     margin: 0 0 20px 0;
     margin-top: 20px;
     text-align: center;
   }
+
   h2 {
     font-size: 22px;
     margin: 0 0 20px 0;
     margin-top: 20px;
     text-align: center;
   }
+
   h3 {
     font-size: 22px;
     margin: 0 0 20px 0;
     margin-top: 20px;
     text-align: center;
   }
+
   input[type="text"],
   input[type="password"],
   input[type="date"],
@@ -165,6 +224,7 @@
     margin-top: 0px;
     text-align: center;
   }
+
   .cont {
     margin-top: 170px;
     margin-bottom: 170px;
