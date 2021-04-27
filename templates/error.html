@@ -1,62 +1,60 @@
 {% extends "user/base.html" %}
+<!--title-->
 {% block title %}Home{% endblock %}
+<!--body-->
 {% block body %}
 
-<!-- Bootstrap CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous" />
+<div class="page">
+  <h1 class="text-center">Error</h1>
 
-<h1 class="text-center">Error</h1>
-
-<h2 class="text-center">
+  <h2 class="text-center">
     To view this page please Register or Login Yourself!
-</h2>
+  </h2>
 
-<div class="text-center">
+  <div class="text-center">
     <a href="{% url 'register_user' %}">
-        <div class="button">
-            <div class="green">REGISTER</div>
-        </div>
+      <div class="button">
+        <div class="green">REGISTER</div>
+      </div>
     </a>
     <a href="{% url 'login_user' %}">
-        <div class="button" onclick="{% url 'login_user' %}">
-            <div class="blue">LOGIN</div>
-        </div>
+      <div class="button" onclick="{% url 'login_user' %}">
+        <div class="blue">LOGIN</div>
+      </div>
     </a>
+  </div>
 </div>
 
 <style>
-    .text-center {
-        border: 3px solid #fff;
-        padding: 10px;
-        margin: 20px;
-    }
+  .page {
+    margin-top: 150px;
+    margin-bottom: 150px;
+  }
+  .button {
+    background: linear-gradient(to bottom, #14eb49 5%, green 100%);
+    background-color: #14eb49;
+    border-radius: 11px;
+    border: 3px solid green;
+    display: inline-block;
+    cursor: pointer;
+    color: #ffffff;
+    font-family: Trebuchet MS;
+    font-size: 28px;
+    font-weight: bold;
+    padding: 7px 76px;
+    text-decoration: none;
+    text-shadow: 2px 2px 0px grey;
+    margin: 50px;
+  }
 
-    .button {
-        background: linear-gradient(to bottom, #339cff 5%, #0c6de3 100%);
-        background-color: #339cff;
-        border-radius: 11px;
-        border: 3px solid #51a3f5;
-        display: inline-block;
-        cursor: pointer;
-        color: #ffffff;
-        font-family: Trebuchet MS;
-        font-size: 28px;
-        font-weight: bold;
-        padding: 7px 76px;
-        text-decoration: none;
-        text-shadow: 2px 2px 0px #2b82d9;
-        margin: 50px;
-    }
+  .button:hover {
+    background: linear-gradient(to bottom, green 5%, #14eb49 100%);
+    background-color: green;
+  }
 
-    .button:hover {
-        background: linear-gradient(to bottom, #0c6de3 5%, #339cff 100%);
-        background-color: #0c6de3;
-    }
-
-    .button:active {
-        position: relative;
-        top: 1px;
-    }
+  .button:active {
+    position: relative;
+    top: 1px;
+  }
 </style>
 {% endblock %}
