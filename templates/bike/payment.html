@@ -7,7 +7,8 @@
 <style>
   #sel_bike1,
   #sel_bike2,
-  #sel_bike3 {
+  #sel_bike3,
+  #amount {
     display: none;
   }
 
@@ -120,6 +121,7 @@
 
     <form action="" method="POST">
       {% csrf_token %}
+      <input type="text" value="{{amount}}" name="amount" id="amount">
       <!-- RAZORPAY INTEGRATION HERE -->
       <script src="https://checkout.razorpay.com/v1/checkout.js" data-key="rzp_test_pQD1ejHNOtqS0Y"
         data-amount="{% widthratio amount 1 100%}" data-currency="INR" data-order_id="{{payment.id}}"
@@ -129,4 +131,6 @@
     </form>
   </div>
 </center>
+
+
 {% endblock %}

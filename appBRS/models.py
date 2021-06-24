@@ -74,7 +74,7 @@ class Rent(models.Model):
 class Employee(models.Model):
     station_emp = models.ForeignKey(Station, on_delete=models.CASCADE)
     employee_id = models.AutoField(primary_key=True)
-    employee_name = models.CharField(max_length=20)
+    employee_name = models.CharField(max_length=30)
     employee_phonNo = models.CharField(max_length=10)
     employee_superkey = models.CharField(max_length=20)
 
@@ -84,12 +84,20 @@ class Employee(models.Model):
 
 class Payment(models.Model):
     Transaction_id = models.AutoField(primary_key=True)
-    bill_amount = models.PositiveIntegerField()
-    Payment_Des = models.CharField(max_length=100)
-    Payment_user = models.ForeignKey(User, on_delete=models.CASCADE)
+    Payment_user = models.CharField(max_length=20)
+    Payment_station = models.CharField(max_length=20)
+    Payment_bike_number = models.CharField(max_length=10)
+    Payment_bike_color = models.CharField(max_length=20)
+    Payment_bike_type = models.CharField(max_length=20)
+    Payment_bike_model = models.CharField(max_length=30)
+    Payment_bike_brand = models.CharField(max_length=30)
+    Payment_rent_type = models.CharField(max_length=30)
+    Payment_rent_number = models.CharField(max_length=30)
+    Payment_emp_name = models.CharField(max_length=30, blank=True)
+    Payment_bill_amount = models.PositiveIntegerField()
 
     def __str__(self):
-        return self.Payment_Des
+        return self.Payment_user
 
 
 class contactUS(models.Model):

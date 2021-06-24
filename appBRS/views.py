@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import userInfo, User, Station, Bike, Employee, contactUS, Rent
+from .models import userInfo, User, Station, Bike, Employee, contactUS, Rent, Payment
 from .forms import userForm, userInfoForm
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse
@@ -126,6 +126,9 @@ def return_bike(request):
             check = Employee.objects.get(employee_superkey=superkey)
             current_user = userInfo.objects.get(user_id=request.user.id)
             bike_number = current_user.user_bike
+            payment_obj = Payment.objects.get(Payment_bike_number=bike_number)
+            payment_obj.Payment_emp_name = check.employee_name
+            payment_obj.save()
             current_user.user_bike = "NOT TAKEN"
             current_user.save()
             current_bike = Bike.objects.get(bike_number=bike_number)
@@ -144,13 +147,14 @@ def payment(request):
 
     if request.method == "POST":
         name = request.POST.get('name')
-        amount = 600
+        amount = request.POST.get('amount')
 
         client = razorpay.Client(
             auth=("rzp_test_pQD1ejHNOtqS0Y", "pqikXx7KeWw8Vv03XElgJKtJ"))
 
         payment = client.order.create({'amount': amount, 'currency': 'INR',
                                        'payment_capture': '1'})
+
         selected_bike_number = request.GET.get('selected_bike')
         bike_rent_number = request.GET.get('bike_rent_number')
         bike_rent = request.GET.get('rent_select')
@@ -164,6 +168,20 @@ def payment(request):
         current_user = userInfo.objects.get(user_id=request.user.id)
         current_user.user_bike = selected_bike_number
         current_user.save()
+
+        payment_obj = Payment()
+        payment_obj.Payment_user = request.user.username
+        payment_obj.Payment_station = selected_bike.bike_station
+        payment_obj.Payment_bike_number = selected_bike_number
+        payment_obj.Payment_bike_color = selected_bike.bike_color
+        payment_obj.Payment_bike_type = selected_bike.bike_type
+        payment_obj.Payment_bike_model = selected_bike.bike_model
+        payment_obj.Payment_bike_brand = selected_bike.bike_brand
+        payment_obj.Payment_rent_type = bike_rent
+        payment_obj.Payment_rent_number = bike_rent_number
+        payment_obj.Payment_bill_amount = amount
+        payment_obj.save()
+
         return redirect('success_take')
 
     bike_rent_number = request.GET.get('bike_rent_number')
