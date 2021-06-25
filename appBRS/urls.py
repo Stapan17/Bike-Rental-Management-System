@@ -5,6 +5,8 @@ from . import views
 
 urlpatterns = [
     path('', views.home, name='home'),
+    path('pdf/', views.GeneratePDF, name='pdf'),
+    path('history/', views.History, name="history"),
     path('home/', views.home, name="home"),
     path('register/', views.register_user, name='register_user'),
     path('login/', views.login_user, name='login_user'),

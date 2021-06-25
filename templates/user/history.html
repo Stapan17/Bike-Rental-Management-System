@@ -1,0 +1,248 @@
+{% extends 'user/base.html' %}
+{% block body %}
+<div class="bikes">
+  <h1>Buyer History</h1>
+
+  <table>
+    <tr class="head">
+      <th>Station</th>
+      <th>Bike Model</th>
+      <th>Brand </th>
+      <th>Rent Type</th>
+      <th>Amount Paid</th>
+      <th>Bike Status</th>
+      <th>Receipt</th>
+      
+      <!-- <th>Rent</th> -->
+    </tr>
+     {% for data in Pay_user %}
+
+    <tr class="clickable-row" href="{% url 'take_bike'%}">
+      <td> {{data.Payment_station}}</td>
+      <td> {{data.Payment_bike_model}} </td>
+      <td> {{data.Payment_bike_brand}} </td>
+      <td> {{data.Payment_rent_type}} </td>
+      <td> {{data.Payment_bill_amount}} </td>
+      {% if data.Payment_emp_name is null %}
+        <td> Not Returned </ed>
+      {% else %}
+        <td> Returned </td>
+      {% endif %}
+      
+        
+      <td>
+        <form action="/pdf/" method="GET">
+            <input type="text" name="Tid" value="{{ data.Transaction_id }}" id="Tid">
+            <button type="submit"> Print Receipt </button>
+        </form>
+      </td>
+    </tr>
+
+  {% endfor %}
+
+  </table>
+</div>
+
+{% comment %} <div class="center">
+  <a class="btnSub" href="{% url 'take_bike' %}" style="text-decoration: none">
+    Take Bike
+  </a>
+  <h3> Click here to take bike at rent<h3>
+</div> {% endcomment %}
+
+
+
+<!---->
+{{ data.Payment_user }} {{ data.Payment_bike_number}} <br />
+<!---->
+{{data.Transaction_id }}<br /><br><br>
+
+
+  <style>
+  #Tid{
+      display: none;
+  }
+    @import url("https://fonts.googleapis.com/css?family=Montserrat");
+
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        font-family: font-family: 'lato', sans-serif;;
+        margin: 0;
+        padding: 0;
+        background: url(../../static/three.jpg) no-repeat;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+      *,
+  *:before,
+  *:after {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 18px;
+    margin-top: 50px;
+    border-radius: 6px;
+  }
+
+  tr {
+    background-color: #f5f5f5;
+
+  }
+
+  th,
+  td {
+    padding: 20px;
+    text-align: left;
+    width: 0%;
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+  }
+
+  .clickable-row:hover {
+    background-color: #cdcdcd;
+  }
+
+  .head {
+    color: white;
+    background: #2D2D26;
+  }
+
+  form {
+    margin: 10px auto;
+    margin-top: 30px;
+    border-radius: 8px;
+  }
+
+  h1 {
+    font-size: 35px;
+    color: white;
+    margin: 0 0 20px 0;
+    margin-top: 20px;
+    text-align: center;
+  }
+
+  input[type="text"],
+  input[type="password"],
+  input[type="date"],
+  input[type="datetime"],
+  input[type="email"],
+  input[type="number"],
+  input[type="search"],
+  input[type="tel"],
+  input[type="time"],
+  input[type="url"],
+  textarea,
+  select {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    font-size: 16px;
+    height: auto;
+    margin: 0;
+    outline: 0;
+    padding: 10px;
+    width: 100%;
+    background-color: #e8eeef;
+    color: #8a97a0;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03) inset;
+    margin-bottom: 5px;
+  }
+
+  input[type="radio"],
+  input[type="checkbox"] {
+    margin: 0 4px 8px 0;
+  }
+
+  select {
+    padding: 6px;
+    height: 32px;
+    border-radius: 2px;
+  }
+
+  button {
+    align: center;
+    padding: 6px 30px 6px 30px;
+    color: #fff;
+    background-color: #4bc970;
+    font-size: 16px;
+    text-align: center;
+    font-style: normal;
+    border-radius: 5px;
+    border: 1px solid #3ac162;
+    border-width: 1px 1px 3px;
+    box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.1) inset;
+  
+    background: -webkit-linear-gradient(to right, #019e35 0%, #02e64d 100%);
+    background: -moz-linear-gradient(to right, #019e35 0%, #02e64d 100%);
+    background: linear-gradient(to right, #019e35 0%, #02e64d 100%);
+  }
+
+  button:hover {
+    background: -webkit-linear-gradient(to right, #02e64d 0%, #019e35 100%);
+    background: -moz-linear-gradient(to right, #02e64d 0%, #019e35 100%);
+    background: linear-gradient(to right, #02e64d 0%, #019e35 100%);
+  }
+
+  .center {
+    align: center;
+    text-align: center;
+    margin: 40px;
+  }
+
+  fieldset {
+    margin-bottom: 30px;
+    border: none;
+  }
+
+  legend {
+    font-size: 1.4em;
+    margin-bottom: 10px;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  label.light {
+    font-weight: 300;
+    display: inline;
+  }
+
+  .bikes {
+    margin: 70px;
+    border-radius: 3px;
+  }
+
+  .number {
+    background-color: #5fcf80;
+    color: #fff;
+    height: 30px;
+    width: 30px;
+    display: inline-block;
+    font-size: 0.8em;
+    margin-right: 4px;
+    line-height: 30px;
+    text-align: center;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.2);
+    border-radius: 100%;
+  }
+
+  @media screen and (min-width: 480px) {
+    form {
+      max-width: 700px;
+    }
+  }
+      
+
+   
+  </style>
+</br><br>
+{% endblock body %}
