@@ -1,3 +1,4 @@
+import razorpay
 from django.shortcuts import render, redirect
 from .models import userInfo, User, Station, Bike, Employee, contactUS, Rent, Payment
 from .forms import userForm, userInfoForm
@@ -10,46 +11,18 @@ from django.contrib import messages
 from .filters import bike_filter
 from django.views.decorators.csrf import csrf_exempt
 from datetime import datetime
-import razorpay
-
-
-from django.views.generic import View
 from django.template.loader import get_template
-from .utils import render_to_pdf
 
-
-# Create your views here.
-
-# def GeneratePDF(request):
-#     template = get_template('bike/invoice.html')
-#     user = request.GET.get('Tid')
-#     obj = Payment.objects.filter(Transaction_id=user)
-#     print(obj)
-#     context = {
-#         "Pay_user": obj,
-#         "today": "today",
-#     }
-#     html = template.render(context)
-#     pdf = render_to_pdf('bike/invoice.html', context)
-#     if pdf:
-#         response = HttpResponse(pdf, content_type='application/pdf')
-#         filename = "Invoice_%s.pdf" %("123456")
-#         content = "inline; filename='%s'" %(filename)
-#         download = request.GET.get("download")
-#         if download:
-#             content = "attachment; filename='%s" %(filename)
-#         response['Content-Disposition'] = content
-#         return response
-#     return HttpResponse("Receipt Not Found!")
 
 def GeneratePDF(request):
     user = request.GET.get('Tid')
     obj = Payment.objects.get(Transaction_id=user)
     objT = obj.Transaction_id
     print(obj)
-    context={"Pay_user": obj, "today": "today", "Transaction": objT}
+    context = {"Pay_user": obj, "today": "today", "Transaction": objT}
 
     return render(request, 'bike/invoice.html', context)
+
 
 def History(request):
     user = request.user.username
@@ -61,9 +34,6 @@ def History(request):
         "today": "today",
     }
     return render(request, 'user/history.html', context)
-
-    
-
 
 
 def home(request):
