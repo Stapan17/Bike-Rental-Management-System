@@ -92,7 +92,6 @@ def register_user(request):
                     login(request, user)
             else:
                 context={"msg":"proof of user is not valid"}
-                print("proof is not valid")
                 return render(request, 'user/register.html', context)
             
             return redirect('home')
