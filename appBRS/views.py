@@ -1,6 +1,6 @@
 import razorpay
 from django.shortcuts import render, redirect
-from .models import userInfo, User, Station, Bike, Employee, contactUS, Rent, Payment
+from .models import userInfo, User, Station, Bike, Employee, contactUS, Rent, Payment, userProof
 from .forms import userForm, userInfoForm
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse
@@ -49,24 +49,52 @@ def register_user(request):
     if request.method == 'POST':
         user_form = userForm(request.POST)
         user_info_form = userInfoForm(request.POST, request.FILES)
-
+        
         if user_form.is_valid() and user_info_form.is_valid():
-            user = user_form.save()
-            user.set_password(user.password)
-            user.save()
 
-            user_info = user_info_form.save(commit=False)
-            user_info.user = user
-            user_info.save()
+            user_Proof = request.POST.get('user_Proof')
+            proof_of_user = request.POST.get('proof_of_user')
+            
+            proofs = userProof.objects.all()
+            
+            has_valid=False
+           
+            if user_Proof == "Aadhaar Card":
+                
+                for proof in proofs:
+                    if proof.Adhar_card == proof_of_user:
+                        has_valid=True
 
-            username = request.POST.get('username')
-            password = request.POST.get('password')
+            elif user_Proof == "Driving Licence":
+                for proof in proofs:
+                    if proof.driving_licence  == proof_of_user:
+                        has_valid=True
+            else:
+                for proof in proofs:
+                    if proof.passport_No  == proof_of_user:
+                        has_valid=True
 
-            user = authenticate(username=username, password=password)
+            if has_valid==True:
+                user = user_form.save()
+                user.set_password(user.password)
+                user.save()
 
-            if user:
-                login(request, user)
+                user_info = user_info_form.save(commit=False)
+                user_info.user = user
+                user_info.save()
 
+                username = request.POST.get('username')
+                password = request.POST.get('password')
+
+                user = authenticate(username=username, password=password)
+
+                if user:
+                    login(request, user)
+            else:
+                context={"msg":"proof of user is not valid"}
+                print("proof is not valid")
+                return render(request, 'user/register.html', context)
+            
             return redirect('home')
 
         else:

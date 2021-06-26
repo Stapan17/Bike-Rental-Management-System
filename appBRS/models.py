@@ -81,6 +81,13 @@ class Employee(models.Model):
     def __str__(self):
         return self.employee_name
 
+class userProof(models.Model):
+    Adhar_card = models.CharField(max_length=12,primary_key=True)
+    driving_licence = models.CharField(max_length=12)
+    passport_No = models.CharField(max_length=12)
+
+    def __str__(self):
+        return self.Adhar_card
 
 class Payment(models.Model):
     Transaction_id = models.AutoField(primary_key=True)

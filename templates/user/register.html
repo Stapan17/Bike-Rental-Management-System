@@ -62,6 +62,11 @@
 </style>
 
 <center>
+{% if msg%}
+
+<span style="font-size:25px;">{{msg}}</span>
+
+{%endif%}
   <h1 class="headered">SignUP</h1>
 
   <form action="" method="POST" enctype="multipart/form-data">
@@ -132,7 +137,7 @@
         />
 
         <select
-          name=""
+          name="user_Proof"
           id="proof_selected"
           onchange="fun()"
           style="
@@ -199,6 +204,7 @@
       Forgot Password
     </button></a
   ><br />
+  
 </center>
 
 <script>
@@ -208,5 +214,6 @@
     selected += " Number";
     document.getElementById("id_proof_of_user").placeholder = selected;
   }
+
 </script>
 {% endblock %}
