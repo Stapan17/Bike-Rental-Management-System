@@ -13,6 +13,14 @@ from django.views.decorators.csrf import csrf_exempt
 from datetime import datetime
 from django.template.loader import get_template
 
+# (1). Take bike change something shubham
+# (2). Not error showing at registration shubham
+
+# (3). Superkey is not working tapan
+# (5). Add datetime in payment tapan
+
+# (4). Bike status returned/not returned mohit
+
 
 def GeneratePDF(request):
     user = request.GET.get('Tid')
@@ -49,32 +57,32 @@ def register_user(request):
     if request.method == 'POST':
         user_form = userForm(request.POST)
         user_info_form = userInfoForm(request.POST, request.FILES)
-        
+
         if user_form.is_valid() and user_info_form.is_valid():
 
             user_Proof = request.POST.get('user_Proof')
             proof_of_user = request.POST.get('proof_of_user')
-            
+
             proofs = userProof.objects.all()
-            
-            has_valid=False
-           
+
+            has_valid = False
+
             if user_Proof == "Aadhaar Card":
-                
+
                 for proof in proofs:
                     if proof.Adhar_card == proof_of_user:
-                        has_valid=True
+                        has_valid = True
 
             elif user_Proof == "Driving Licence":
                 for proof in proofs:
-                    if proof.driving_licence  == proof_of_user:
-                        has_valid=True
+                    if proof.driving_licence == proof_of_user:
+                        has_valid = True
             else:
                 for proof in proofs:
-                    if proof.passport_No  == proof_of_user:
-                        has_valid=True
+                    if proof.passport_No == proof_of_user:
+                        has_valid = True
 
-            if has_valid==True:
+            if has_valid == True:
                 user = user_form.save()
                 user.set_password(user.password)
                 user.save()
@@ -91,9 +99,9 @@ def register_user(request):
                 if user:
                     login(request, user)
             else:
-                context={"msg":"proof of user is not valid"}
+                context = {"msg": "proof of user is not valid"}
                 return render(request, 'user/register.html', context)
-            
+
             return redirect('home')
 
         else:
