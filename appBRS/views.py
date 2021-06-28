@@ -16,9 +16,6 @@ from django.template.loader import get_template
 # (1). Take bike change something shubham
 # (2). Not error showing at registration shubham
 
-# (3). Superkey is not working tapan
-# (5). Add datetime in payment tapan
-
 # (4). Bike status returned/not returned mohit
 
 
@@ -181,7 +178,8 @@ def return_bike(request):
             check = Employee.objects.get(employee_superkey=superkey)
             current_user = userInfo.objects.get(user_id=request.user.id)
             bike_number = current_user.user_bike
-            payment_obj = Payment.objects.get(Payment_bike_number=bike_number)
+            payment_obj = Payment.objects.get(
+                Payment_bike_number=bike_number, Payment_emp_name="Employee Name")
             payment_obj.Payment_emp_name = check.employee_name
             payment_obj.save()
             current_user.user_bike = "NOT TAKEN"

@@ -81,16 +81,19 @@ class Employee(models.Model):
     def __str__(self):
         return self.employee_name
 
+
 class userProof(models.Model):
-    Adhar_card = models.CharField(max_length=12,primary_key=True)
+    Adhar_card = models.CharField(max_length=12, primary_key=True)
     driving_licence = models.CharField(max_length=12)
     passport_No = models.CharField(max_length=12)
 
     def __str__(self):
         return self.Adhar_card
 
+
 class Payment(models.Model):
     Transaction_id = models.AutoField(primary_key=True)
+    Payment_date = models.DateTimeField(default=datetime.now, blank=True)
     Payment_user = models.CharField(max_length=20)
     Payment_station = models.CharField(max_length=20)
     Payment_bike_number = models.CharField(max_length=10)
@@ -100,7 +103,8 @@ class Payment(models.Model):
     Payment_bike_brand = models.CharField(max_length=30)
     Payment_rent_type = models.CharField(max_length=30)
     Payment_rent_number = models.CharField(max_length=30)
-    Payment_emp_name = models.CharField(max_length=30, blank=True)
+    Payment_emp_name = models.CharField(
+        max_length=30, blank=True, default="Employee Name")
     Payment_bill_amount = models.PositiveIntegerField()
 
     def __str__(self):
