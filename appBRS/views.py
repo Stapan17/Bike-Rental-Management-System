@@ -96,8 +96,8 @@ def register_user(request):
                 if user:
                     login(request, user)
             else:
-                context = {"msg": "proof of user is not valid"}
-                return render(request, 'user/register.html', context)
+                messages.error(request, 'User Proof is not valid!')
+                return render(request, 'user/register.html')
 
             return redirect('home')
 

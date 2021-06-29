@@ -62,11 +62,17 @@
 </style>
 
 <center>
-{% if msg%}
+{% if user_form.errors %}
 
-<span style="font-size:25px;">{{msg}}</span>
+<span style="font-size:25px;">{{user_form.errors}}</span>
 
 {%endif%}
+{% if user_info_form.errors %}
+
+<span style="font-size:25px;">{{user_info_form.errors }}</span>
+
+{%endif%}
+
   <h1 class="headered">SignUP</h1>
 
   <form action="" method="POST" enctype="multipart/form-data">
