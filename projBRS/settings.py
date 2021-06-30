@@ -27,7 +27,7 @@ SECRET_KEY = 'hkk3dv3xdpxwhegwoianz+!4u_%f=2#*psd34u@4$4je8%u+k@'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1']
 # ALLOWED_HOSTS = ['brs17.herokuapp.com']
 
 
@@ -81,14 +81,21 @@ WSGI_APPLICATION = 'projBRS.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'brs',
-        'USER': 'brs',
-        'PASSWORD': 'b1r2s3@SOUL',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'brs1',
+        'USER': 'soul1',
+        'PASSWORD': 'brs1',
         'HOST': 'localhost',
-        'PORT': '3306',
+        'PORT': '5432',
     }
 }
+
+# CREATE DATABASE brs1;
+# CREATE USER soul1 WITH PASSWORD 'brs1';
+# ALTER ROLE soul1 SET client_encoding TO 'utf8';
+# ALTER ROLE soul1 SET default_transaction_isolation TO 'read committed';
+# ALTER ROLE soul1 SET timezone TO 'UTC';
+# GRANT ALL PRIVILEGES ON DATABASE brs1 TO soul1;
 
 
 # Password validation
