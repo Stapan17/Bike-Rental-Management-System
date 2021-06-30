@@ -12,10 +12,10 @@
       <th>Amount Paid</th>
       <th>Bike Status</th>
       <th>Receipt</th>
-      
+
       <!-- <th>Rent</th> -->
     </tr>
-     {% for data in Pay_user %}
+    {% for data in Pay_user %}
 
     <tr class="clickable-row" href="{% url 'take_bike'%}">
       <td> {{data.Payment_station}}</td>
@@ -23,22 +23,22 @@
       <td> {{data.Payment_bike_brand}} </td>
       <td> {{data.Payment_rent_type}} </td>
       <td> {{data.Payment_bill_amount}} </td>
-      {% if data.Payment_emp_name is null %}
-        <td> Not Returned </ed>
+      {% ifnotequal data.Payment_emp_name "Employee Name" %}
+      <td> Returned </td>
       {% else %}
-        <td> Returned </td>
-      {% endif %}
-      
-        
+      <td> Not Returned </ed>
+        {% endifnotequal %}
+
+
       <td>
         <form action="/pdf/" method="GET">
-            <input type="text" name="Tid" value="{{ data.Transaction_id }}" id="Tid">
-            <button type="submit"> Print Receipt </button>
+          <input type="text" name="Tid" value="{{ data.Transaction_id }}" id="Tid">
+          <button type="submit"> Print Receipt </button>
         </form>
       </td>
     </tr>
 
-  {% endfor %}
+    {% endfor %}
 
   </table>
 </div>
@@ -58,25 +58,29 @@
 {{data.Transaction_id }}<br /><br><br>
 
 
-  <style>
-  #Tid{
-      display: none;
+<style>
+  #Tid {
+    display: none;
   }
-    @import url("https://fonts.googleapis.com/css?family=Montserrat");
 
-      * {
-        box-sizing: border-box;
-      }
-      body {
-        font-family: font-family: 'lato', sans-serif;;
-        margin: 0;
-        padding: 0;
-        background: url(../../static/three.jpg) no-repeat;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
-      }
-      *,
+  @import url("https://fonts.googleapis.com/css?family=Montserrat");
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: font-family: 'lato', sans-serif;
+    ;
+    margin: 0;
+    padding: 0;
+    background: url(../../static/three.jpg) no-repeat;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  *,
   *:before,
   *:after {
     -moz-box-sizing: border-box;
@@ -178,7 +182,7 @@
     border: 1px solid #3ac162;
     border-width: 1px 1px 3px;
     box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.1) inset;
-  
+
     background: -webkit-linear-gradient(to right, #019e35 0%, #02e64d 100%);
     background: -moz-linear-gradient(to right, #019e35 0%, #02e64d 100%);
     background: linear-gradient(to right, #019e35 0%, #02e64d 100%);
@@ -240,9 +244,6 @@
       max-width: 700px;
     }
   }
-      
-
-   
-  </style>
+</style>
 </br><br>
 {% endblock body %}

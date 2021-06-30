@@ -13,17 +13,11 @@ from django.views.decorators.csrf import csrf_exempt
 from datetime import datetime
 from django.template.loader import get_template
 
-# (1). Take bike change something shubham
-# (2). Not error showing at registration shubham
-
-# (4). Bike status returned/not returned mohit
-
 
 def GeneratePDF(request):
     user = request.GET.get('Tid')
     obj = Payment.objects.get(Transaction_id=user)
     objT = obj.Transaction_id
-    print(obj)
     context = {"Pay_user": obj, "today": "today", "Transaction": objT}
 
     return render(request, 'bike/invoice.html', context)
@@ -31,8 +25,9 @@ def GeneratePDF(request):
 
 def History(request):
     user = request.user.username
-    obj = Payment.objects.filter(Payment_user=user)
-    print(obj)
+    flag = False
+    obj = Payment.objects.filter(
+        Payment_user=user)
 
     context = {
         "Pay_user": obj,
@@ -201,7 +196,7 @@ def payment(request):
     if request.method == "POST":
         name = request.POST.get('name')
         amount = request.POST.get('amount')
-
+        amount = (int)(amount)
         client = razorpay.Client(
             auth=("rzp_test_pQD1ejHNOtqS0Y", "pqikXx7KeWw8Vv03XElgJKtJ"))
 
