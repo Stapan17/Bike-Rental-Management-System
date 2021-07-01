@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 import os
 from pathlib import Path
 import django_heroku
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,9 +26,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'hkk3dv3xdpxwhegwoianz+!4u_%f=2#*psd34u@4$4je8%u+k@'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['127.0.0.1', 'brs17.herokuapp.com']
 # ALLOWED_HOSTS = ['brs17.herokuapp.com']
 
 
@@ -40,7 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
+    'whitenoise.runserver_nostatic',
     'appBRS',
 ]
 
@@ -79,6 +80,7 @@ WSGI_APPLICATION = 'projBRS.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -90,7 +92,10 @@ DATABASES = {
     }
 }
 
-# CREATE DATABASE brs1;
+db_from_env = dj_database_url.config(conn_max_age=600)
+DATABASES['default'].update(db_from_env)
+
+# CREATE DATABASE brs1
 # CREATE USER soul1 WITH PASSWORD 'brs1';
 # ALTER ROLE soul1 SET client_encoding TO 'utf8';
 # ALTER ROLE soul1 SET default_transaction_isolation TO 'read committed';
@@ -155,3 +160,6 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'YOUR EMAIL'
 EMAIL_HOST_PASSWORD = 'EMAIL PASSWORD'
 django_heroku.settings(locals())
+
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
